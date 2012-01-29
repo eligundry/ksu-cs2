@@ -1,0 +1,24 @@
+ 15:01:29 up 19 days, 21:35, 22 users,  load average: 0.17, 0.11, 0.09
+USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT
+msami    pts/2    41.224.135.225   10:47    4:14m  0.15s  0.15s -tcsh
+mfuhry   pts/3    amgrad-pc2.math. 12:05    2:55m  0.06s  0.06s -bash
+erodic   pts/4    lab214.labs.cs.k 14:25    5.00s  0.39s  0.39s -bash
+ntierney          131.123.42.204:0 14:36   29:30m  1:05m  0.04s pam: gdm-passwo
+kwhalen  pts/5    lab221.labs.cs.k 15:01    8.00s  0.08s  0.08s -bash
+halomari pts/6    lab201.labs.cs.k 14:26    1:48   0.13s  0.13s -bash
+myuan    pts/0    131.123.41.100:0 09:37    5:22m  9.90s  0.03s bash
+myuan    pts/1    131.123.41.100:0 09:38    5:22m  0.03s  0.03s bash
+halomari pts/7    stickley.sdml.cs 13:18    1:25m  0.15s  0.15s -bash
+ngiunta  pts/8    lab220.labs.cs.k 14:58    1.00s  0.40s  0.40s -bash
+gmakar   pts/9    lab216.labs.cs.k 14:26    1:58   0.14s  0.14s -bash
+awakeen  pts/10   lab215.labs.cs.k 14:26    1:44   0.13s  0.13s -bash
+jadamek  pts/11   lab219.labs.cs.k 14:27    1.00s  0.18s  0.18s -bash
+rireland pts/15   lab217.labs.cs.k 14:27   24.00s  0.13s  0.13s -bash
+hzhao    pts/13   lab211.labs.cs.k 14:35   19.00s  0.10s  0.10s -bash
+cmcclear pts/16   lab208.labs.cs.k 14:27   26:00   0.07s  0.07s -bash
+egundry  pts/17   ip-131-123-181-8 14:28    1.00s  3.55s  0.02s w
+kmanring pts/18   ip-131-123-180-2 14:50   24.00s  0.15s  0.15s -bash
+kmanring pts/12   lab209.labs.cs.k 14:27   15:19   0.11s  0.11s -bash
+ntierney pts/19   lab204.labs.cs.k 14:42   34.00s  0.13s  0.13s -bash
+swilson  pts/20   dhcp34-120.mcs.k 14:43    1:38   0.14s  0.14s -bash
+cmcclear pts/21   ip-131-123-183-1 14:53   14.00s  0.08s  0.08s -bash
