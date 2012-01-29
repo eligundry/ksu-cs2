@@ -21,10 +21,13 @@ public:
 
 	// Compares two bigints
 	bool operator==(const bigint&);
-	// Compares two bigints
+	// Compares bigint to integer
 	bool operator==(int);
 	// Compares two bigints, where bigint is an array
 	bool operator==(const char[]);
+
+	// Outputs bigint with 80 digits per line
+	void output(ostream&) const;
 private:
 	int digits[MAX_SIZE];
 	// Creates bigint with value zero

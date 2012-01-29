@@ -41,7 +41,7 @@ bigint::bigint(char* x)
 {
 	zero();
 
-	for (int i = 0, y = strlen(x); x[i] != '\0'; ++i, --y) {
+	for (int i = 0, y = (strlen(x) - 1); x[i] != '\0'; ++i, --y) {
 		digits[y] = (int(x[i]) - int('0'));
 	}
 }
@@ -57,14 +57,39 @@ bool bigint::operator==(const bigint& x)
 
 bool bigint::operator==(int x)
 {
+	for (int i = 0; x != 0; ++i) {
+		if (digits[i] != x % 10) return false;
+		x /= 10;
+	}
+
 	return true;
 }
 
 bool bigint::operator==(const char x[])
 {
-	for (int i = 0, y = strlen(x); x[i] != '\0'; ++i, --y) {
+	for (int i = 0, y = (strlen(x) - 1); x[i] != '\0'; ++i, --y) {
 		if (digits[y] != int(x[i]) - int('0')) return false;
 	}
 
 	return true;
+}
+
+void bigint::output(ostream& out) const
+{
+	int i = MAX_SIZE,
+		j = 0;
+
+	do {
+		--i;
+	} while(digits[i] == 0);
+
+	do {
+		if (j % 80 != 0)
+			out << digits[i]; 
+		else
+			out << std::endl << digits[i];
+
+		--i;
+		++j;
+	} while(i >= 0);
 }
