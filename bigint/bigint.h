@@ -2,6 +2,7 @@
 #define CS33001_BIGINT_H
 
 #include <iostream>
+#include <cstring>
 using std::ostream;
 
 const int MAX_SIZE = 100;

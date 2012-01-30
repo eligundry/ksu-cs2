@@ -7,8 +7,6 @@
  *
  */
 
-#include <iostream>
-#include <cstring>
 #include "bigint.h"
 
 // Creates bigint with value 0
