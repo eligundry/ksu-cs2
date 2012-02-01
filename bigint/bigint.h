@@ -30,6 +30,10 @@ public:
 	// Adds two bigints together
 	bigint operator+(const bigint&);
 
+	// Overloads the [] operator to return the digit at that index
+	// Example: int digit = number[0];
+	int operator[](const int);
+
 	// Outputs bigint with 80 digits per line
 	void output(ostream&) const;
 private:

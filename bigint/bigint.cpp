@@ -109,3 +109,9 @@ bigint bigint::operator+(const bigint& right)
 
 	return result;
 }
+
+// Get's digit from bigint specified spot
+int bigint::operator[](const int spot)
+{
+	return digits[spot];
+}
