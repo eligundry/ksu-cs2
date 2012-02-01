@@ -18,7 +18,7 @@ public:
 	bigint(int);
 	// Initialize bigint to size x, where x is a character array
 	// Example: bigint number("30");
-	bigint(char[]);
+	bigint(const char[]);
 
 	// Compares two bigints
 	bool operator==(const bigint&);
@@ -26,6 +26,9 @@ public:
 	bool operator==(int);
 	// Compares two bigints, where bigint is an array
 	bool operator==(const char[]);
+
+	// Adds two bigints together
+	bigint operator+(const bigint&);
 
 	// Outputs bigint with 80 digits per line
 	void output(ostream&) const;

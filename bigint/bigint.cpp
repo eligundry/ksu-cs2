@@ -35,7 +35,7 @@ bigint::bigint(int x)
 }
 
 // Initalizes bigint to x, where x is a string
-bigint::bigint(char* x)
+bigint::bigint(const char x[])
 {
 	zero();
 
@@ -90,4 +90,22 @@ void bigint::output(ostream& out) const
 		--i;
 		++j;
 	} while(i >= 0);
+}
+
+// Adds two bigints together with the add operator
+bigint bigint::operator+(const bigint& right)
+{
+	bigint result = 0;
+	int temp = 0;
+
+	for (int i = MAX_SIZE; i >= 0; --i) {
+		temp = digits[i] + right.digits[i];
+
+		if (temp % 10 != 0 && temp != 0 && i != MAX_SIZE)
+			result.digits[i] += (temp % 10) + 1;
+		else
+			result.digits[i] += temp % 10;
+	}
+
+	return result;
 }
