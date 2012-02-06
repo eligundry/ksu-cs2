@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstring>
 using std::ostream;
+using std::istream;
 
 const int MAX_SIZE = 100;
 
@@ -28,7 +29,7 @@ public:
 	bool operator==(const char[]);
 
 	// Adds two bigints together
-	bigint operator+(const bigint&);
+	bigint operator+(bigint);
 
 	// Overloads the [] operator to return the digit at that index
 	// Example: int digit = number[0];
@@ -36,6 +37,12 @@ public:
 
 	// Outputs bigint with 80 digits per line
 	void output(ostream&) const;
+
+	// Outputs bigint with out operator
+	friend ostream& operator<<(ostream&, bigint&);
+
+	// Inputs bigint operator with the input operator
+	friend istream& operator>>(istream&, bigint&);
 private:
 	int digits[MAX_SIZE];
 	// Creates bigint with value zero

@@ -92,26 +92,68 @@ void bigint::output(ostream& out) const
 	} while(i >= 0);
 }
 
-// Adds two bigints together with the add operator
-bigint bigint::operator+(const bigint& right)
+ostream& operator<<(ostream& out, bigint& num)
 {
-	bigint result = 0;
-	int temp = 0;
+	int i = MAX_SIZE,
+		j = 0;
 
-	for (int i = MAX_SIZE; i >= 0; --i) {
-		temp = digits[i] + right.digits[i];
+	do {
+		--i;
+	} while(num.digits[i] == 0);
 
-		if (temp % 10 != 0 && temp != 0 && i != MAX_SIZE)
-			result.digits[i] += (temp % 10) + 1;
+	do {
+		if (j % 80 != 0)
+			out << num.digits[i]; 
 		else
-			result.digits[i] += temp % 10;
+			out << std::endl << num.digits[i];
+
+		--i;
+		++j;
+	} while(i >= 0);
+
+	return out;
+}
+
+// Adds two bigints together with the add operator
+bigint bigint::operator+(bigint right)
+{
+	int i = 0,
+		temp = 0,
+		temp2 = 0;
+
+	while (i < MAX_SIZE) {
+		temp = right.digits[i] + digits[i] + temp;
+		temp2 = temp % 10;
+		temp /= 10;
+		right.digits[i] = temp2;
+		++i;
 	}
 
-	return result;
+	return right;
 }
 
 // Get's digit from bigint specified spot
 int bigint::operator[](const int spot)
 {
 	return digits[spot];
+}
+
+istream& operator>>(istream& in, bigint& num)
+{
+	int i = 0;
+	char next,
+		 temp[MAX_SIZE];
+
+	in >> next;
+
+	while (next != ';' && !in.eof()) {
+		temp[i] = next;
+		in >> next;
+		++i;
+	}
+
+	temp[i] = 0;
+	num = bigint(temp);
+
+	return in;
 }
