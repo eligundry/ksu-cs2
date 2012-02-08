@@ -132,6 +132,30 @@ bigint bigint::operator+(bigint right)
 	return right;
 }
 
+// Multiples bigint by other bigitns
+bigint bigint::operator*(const bigint& rhs)
+{
+	bigint result;
+
+	for (int i = 0; i < MAX_SIZE; ++i) {
+		digits[i] = (digits[i] * rhs.digits[i]) * (pow(10, i));
+	}
+
+	return result;
+}
+
+// Multiples bigint by powers of 10
+bigint bigint::times_10(const int x)
+{
+	bigint result;
+
+	if (x == 0) {
+		return *this;
+	}
+
+	return result;
+}
+
 // Get's digit from bigint specified spot
 int bigint::operator[](const int spot)
 {

@@ -23,9 +23,9 @@ tests: test_default_ctor test_int_ctor test_c_str_ctor         \
 	./test_c_str_ctor
 	./test_add
 	./test_subscript
+	./test_multiply
 	./test_times_10
 	./test_times_single_digit
-	./test_multiply
 	./output
 	./input
 	./input2

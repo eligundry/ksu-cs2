@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <cmath>
 using std::ostream;
 using std::istream;
 
@@ -30,6 +31,10 @@ public:
 
 	// Adds two bigints together
 	bigint operator+(bigint);
+	// Multiplies bigint by powers of 10
+	bigint times_10(const int);
+	// Multiples bigint by another bigint
+	bigint operator*(const bigint&);
 
 	// Overloads the [] operator to return the digit at that index
 	// Example: int digit = number[0];
