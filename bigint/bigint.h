@@ -35,7 +35,7 @@ public:
 	// Multiplies bigint by powers of 10
 	void times_10(int);
 	// Multiplies bigint by a single number
-	bigint times_single_digit(const int);
+	void times_single_digit(const int);
 	// Multiples bigint by another bigint
 	bigint operator*(const bigint&);
 

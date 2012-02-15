@@ -135,42 +135,42 @@ bigint bigint::operator+(bigint right)
 // Multiples bigint by other bigitns
 bigint bigint::operator*(const bigint& rhs)
 {
-	bigint temp_rhs = rhs,
-		   temp_lhs = *this;
+	bigint partial,
+		   result;
+
+	for (int i = 0; i < MAX_SIZE; ++i) {
+		partial = *this;
+		partial.times_single_digit(rhs.digits[i]);
+		partial.times_10(i);
+		result = result + partial;
+	}
+
 	return result;
 }
 
 // Multiples bigint by powers of 10
 void bigint::times_10(int x)
 {
-	int i = MAX_SIZE;
-
-	do {
+	for (int i = (MAX_SIZE - 1); i >= 0 ; --i) {
 		digits[i] = digits[i - x];
-		std::cout << digits[i];
-		--i;
-	} while (i >= 0);
-
-	do {
-		digits[MAX_SIZE - x] = 0;
-		--x;
-	} while (x >= 0);
-}
-
-bigint bigint::times_single_digit(const int x)
-{
-	bigint result;
-
-	if (x == 0) {
-		return *this;
-	} else {
-		for (int i = MAX_SIZE; i >= 0; --i) {
-			result.digits[i] = digits[i] * x; 
-		}
 	}
 
+	for (int i = (x - 1); i >= 0; --i) {
+		digits[i] = 0;
+	}
+}
 
-	return result;
+// Multiples bigint by a single number 
+void bigint::times_single_digit(const int x)
+{
+	int spot_value = 0,
+		carry = 0;
+
+	for (int i = 0; i < MAX_SIZE; ++i) {
+		spot_value = ((x * digits[i]) + carry) % 10;
+		carry = ((x * digits[i]) + carry) / 10;
+		digits[i] = spot_value;
+	}
 }
 
 // Get's digit from bigint specified spot

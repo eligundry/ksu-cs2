@@ -32,6 +32,9 @@ string.o: string.h string.cpp
 test_%: string.o test_%.o
 	$(CPP) string.o test_$*.o -o test_$*
 
+test_default_ctor: string.o test_default_ctor.o
+	$(CPP) string.o test_default_ctor.o -o test_default_ctor
+
 test_%.o: string.h test_%.cpp
 	$(CPP) $(OPTIONS) -c test_$*.cpp
 

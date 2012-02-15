@@ -14,57 +14,9 @@ int main ()
         // SETUP FIXTURE
 
         // TEST
-        string  str(X);
+        string str;
 
         // VERIFY
-        assert(str == YYY);
+        assert(str[0] == '\0');
     }
-
-    {
-        //------------------------------------------------------
-        // SETUP FIXTURE
-
-        // TEST
-        string  str(X);
-
-        // VERIFY
-        assert(str == YYY);
-    }
-
-    {
-        //------------------------------------------------------
-        // SETUP FIXTURE
-
-        // TEST
-        string  str(X);
-
-        // VERIFY
-        assert(str == YYY);
-    }
-
-    {
-        //------------------------------------------------------
-        // SETUP FIXTURE
-
-        // TEST
-        string  str(X);
-
-        // VERIFY
-        assert(str == YYY);
-    }
-
-    {
-        //------------------------------------------------------
-        // SETUP FIXTURE
-
-        // TEST
-        string  str(X);
-
-        // VERIFY
-        assert(str == YYY);
-    }
-
-    // ADD ADDITIONAL TESTS AS NECESSARY
-
 }
-
