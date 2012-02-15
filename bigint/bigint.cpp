@@ -135,23 +135,40 @@ bigint bigint::operator+(bigint right)
 // Multiples bigint by other bigitns
 bigint bigint::operator*(const bigint& rhs)
 {
-	bigint result;
-
-	for (int i = 0; i < MAX_SIZE; ++i) {
-		digits[i] = (digits[i] * rhs.digits[i]) * (pow(10, i));
-	}
-
+	bigint temp_rhs = rhs,
+		   temp_lhs = *this;
 	return result;
 }
 
 // Multiples bigint by powers of 10
-bigint bigint::times_10(const int x)
+void bigint::times_10(int x)
+{
+	int i = MAX_SIZE;
+
+	do {
+		digits[i] = digits[i - x];
+		std::cout << digits[i];
+		--i;
+	} while (i >= 0);
+
+	do {
+		digits[MAX_SIZE - x] = 0;
+		--x;
+	} while (x >= 0);
+}
+
+bigint bigint::times_single_digit(const int x)
 {
 	bigint result;
 
 	if (x == 0) {
 		return *this;
+	} else {
+		for (int i = MAX_SIZE; i >= 0; --i) {
+			result.digits[i] = digits[i] * x; 
+		}
 	}
+
 
 	return result;
 }

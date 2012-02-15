@@ -2,6 +2,7 @@
 #define CS33001_BIGINT_H
 
 #include <iostream>
+#include <cstdlib>
 #include <cstring>
 #include <cmath>
 using std::ostream;
@@ -32,7 +33,9 @@ public:
 	// Adds two bigints together
 	bigint operator+(bigint);
 	// Multiplies bigint by powers of 10
-	bigint times_10(const int);
+	void times_10(int);
+	// Multiplies bigint by a single number
+	bigint times_single_digit(const int);
 	// Multiples bigint by another bigint
 	bigint operator*(const bigint&);
 
