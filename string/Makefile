@@ -4,7 +4,7 @@
 CPP     = g++
 OPTIONS = -g -Wall -W -Wunused -Wuninitialized -Wshadow 
 
-EXE1 = test_default_ctor test_c_str_ctor test_assignment test_subscript test_length test_less_than test_greater_than test_additon
+EXE1 = test_default_ctor test_c_str_ctor test_assignment test_subscript test_length test_less_than test_greater_than test_additon test_reverse test_multiplication
 EXE2 = 
 
 #==============================================================
@@ -26,6 +26,8 @@ string: $(EXE1) $(EXE2)
 	./test_less_than
 	./test_greater_than
 	./test_additon
+	./test_reverse
+	./test_multiplication
 
 #==============================================================
 # string type
@@ -56,5 +58,5 @@ clean:
 	rm -f test_default_ctor test_c_str_ctor test_assignment
 	rm -f test_length test_subscript
 	rm -f test_less_than test_greater_than
-	rm -f test_additon
+	rm -f test_additon test_reverse test_multiplication
 

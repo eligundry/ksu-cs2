@@ -62,6 +62,12 @@ public:
 	int length() const;
 
 	/*
+	 * Reverses the content of a string
+	 * Ex: str.reverse(); 
+	 */
+	string reverse();
+
+	/*
 	 * Compares the length of the strings and returns bool
 	 * Ex: str < str2; 
 	 * Ex: str <= str2; 
@@ -86,6 +92,12 @@ public:
 	 */
 	string operator+=(const string&);
 	string operator+=(const char[]);
+
+	/*
+	 * Multiples the contents of a string by integer
+	 * Ex: str1 = str2 * 5; 
+	 */
+	string operator*(const int);
 
 private:
 	char s[MAX_SIZE];

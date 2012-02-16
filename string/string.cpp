@@ -115,6 +115,21 @@ int string::length() const
 }
 
 /*
+ * Reverses the content of a string
+ * Ex: str.reverse(); 
+ */
+string string::reverse()
+{
+	string result;
+
+	for (int i = length(); i >= 0; --i) {
+		result += s[i];
+	}
+
+	return result;
+}
+
+/*
  * Compares the length of the strings and returns bool
  * Ex: str < str2; 
  * Ex: str <= str2; 
@@ -191,4 +206,28 @@ string string::operator+=(const char rhs[])
     }
 
 	return *this;
+}
+
+/*
+ * Multiples the contents of a string by integer
+ * Ex: str1 = str2 * 5; 
+ */
+string string::operator*(int x)
+{
+	switch (x) {
+		case 0:
+			return "";
+			break;
+		case 1:
+			return *this;
+			break;
+		default:
+			string result;
+
+			for (int i = 1; i <= x; i++) {
+				result += *this;
+			}
+
+			return result;
+	}
 }
