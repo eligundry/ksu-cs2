@@ -96,15 +96,27 @@ int string::length() const
 
 /*
  * Compares the length of the strings and returns bool
- * Ex: str > str2;
  * Ex: str < str2; 
+ * Ex: str <= str2; 
+ * Ex: str > str2;
+ * Ex: str >= str2;
  */
 bool string::operator<(const string& rhs) const
 {
 	return length() < rhs.length();
 }
 
+bool string::operator<=(const string& rhs) const
+{
+	return length() <= rhs.length();
+}
+
 bool string::operator>(const string& rhs) const
 {
 	return length() > rhs.length();
+}
+
+bool string::operator>=(const string& rhs) const
+{
+	return length() >= rhs.length();
 }

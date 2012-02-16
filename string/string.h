@@ -55,11 +55,15 @@ public:
 
 	/*
 	 * Compares the length of the strings and returns bool
-	 * Ex: str > str2;
 	 * Ex: str < str2; 
+	 * Ex: str <= str2; 
+	 * Ex: str > str2;
+	 * Ex: str >= str2;
 	 */
 	bool operator<(const string&) const; 
+	bool operator<=(const string&) const; 
 	bool operator>(const string&) const; 
+	bool operator>=(const string&) const; 
 
 private:
 	char s[MAX_SIZE];
