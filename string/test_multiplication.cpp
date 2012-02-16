@@ -11,6 +11,19 @@ int main ()
 {
 	{
 		// Setup
+		string str1,
+			   result;
+
+		// Test
+		result = str1 * 5;
+
+		// Verify
+		assert(str1 == "");
+		assert(result == "");
+	}
+
+	{
+		// Setup
 		string str1('a'),
 			   result;
 

@@ -110,6 +110,14 @@ public:
 	 */
 	string strip_nl();
 
+	/*
+	 * Repeats a string a specified number of times with optional seperator
+	 * Ex: str1.repeat(5);
+	 * Ex: str1.repeat(5, "\n"); 
+	 */
+	string repeat(const int);
+	string repeat(const int, const string&);
+
 private:
 	char s[MAX_SIZE];
 };

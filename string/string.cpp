@@ -260,3 +260,30 @@ string string::strip_nl()
 	return result;
 }
 
+/*
+ * Repeats a string a specified number of times with optional seperator
+ * Ex: str1.repeat(5);
+ * Ex: str1.repeat(5, "\n"); 
+ */
+string string::repeat(const int x)
+{
+	string result;
+
+	for (int i = 0; i < x; ++i) {
+		result += *this;
+	}
+
+	return result;
+}
+
+string string::repeat(const int x, const string& seperator)
+{
+	string result;
+
+	for (int i = 0; i < x; ++i) {
+		result += *this;
+		result += seperator;
+	}
+
+	return result;
+}
