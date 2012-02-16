@@ -43,9 +43,24 @@ string::string(const char str[])
 	s[i] = '\0';
 }
 
+string string::operator=(const char str[])
+{
+	int i = 0;
+
+	while (str[i] != '\0') {
+		s[i] = str[i];
+		++i;
+	}
+
+	s[i] = '\0';
+
+	return *this;
+}
+
 /*
  * Compares a string to another string
  * Ex: str == other_str; 
+ * Ex: str != other_str; 
  */
 bool string::operator==(const string& rhs) const 
 {
@@ -63,6 +78,11 @@ bool string::operator==(const string& rhs) const
 	} else {
 		return false;
 	}
+}
+
+bool string::operator!=(const string& rhs) const
+{
+	return !(*this == rhs);
 }
 
 /*
@@ -119,4 +139,56 @@ bool string::operator>(const string& rhs) const
 bool string::operator>=(const string& rhs) const
 {
 	return length() >= rhs.length();
+}
+
+
+/*
+ * Adds two strings together
+ * Ex: str = str1 + str2; 
+ */
+string string::operator+(const string& rhs)
+{
+	string result = *this;
+
+    for (int i = length(), x = 0, count = length() + rhs.length(); i <= count; ++i, ++x) {
+		result.s[i] = rhs.s[x];
+    }
+
+	return result;
+}
+
+string string::operator+(const char rhs[])
+{
+	string str_rhs = rhs,
+		   result = *this;
+
+    for (int i = length(), x = 0, count = length() + str_rhs.length(); i <= count; ++i, ++x) {
+		result.s[i] = str_rhs.s[x];
+    }
+
+	return result;
+}
+
+/*
+ * Adds string to current string
+ * Ex: str1 += str2; 
+ */
+string string::operator+=(const string& rhs)
+{
+    for (int i = length(), x = 0, count = length() + rhs.length(); i <= count; ++i, ++x) {
+		s[i] = rhs.s[x];
+    }
+
+	return *this;
+}
+
+string string::operator+=(const char rhs[])
+{
+	string str_rhs = rhs;
+
+    for (int i = length(), x = 0, count = length() + str_rhs.length(); i <= count; ++i, ++x) {
+		s[i] = str_rhs.s[x];
+    }
+
+	return *this;
 }

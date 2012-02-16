@@ -35,10 +35,18 @@ public:
 	string(const char[]);
 
 	/*
+	 * Assignment operator for strings
+	 * Ex: string str = "It's over 9000!"; 
+	 */
+	string operator=(const char[]);
+
+	/*
 	 * Tests equality between two strings
 	 * Ex: str == str2; 
+	 * Ex: str != str2; 
 	 */
 	bool operator==(const string&) const;
+    bool operator!=(const string&) const;
 
 	/*
 	 * Returns the character from the specified spot in the string
@@ -64,6 +72,20 @@ public:
 	bool operator<=(const string&) const; 
 	bool operator>(const string&) const; 
 	bool operator>=(const string&) const; 
+
+	/*
+	 * Adds two strings together
+	 * Ex: str = str1 + str2; 
+	 */
+	string operator+(const string&);
+	string operator+(const char[]);
+
+	/*
+	 * Adds string to current string
+	 * Ex: str1 += str2; 
+	 */
+	string operator+=(const string&);
+	string operator+=(const char[]);
 
 private:
 	char s[MAX_SIZE];
