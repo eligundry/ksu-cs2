@@ -66,6 +66,12 @@ public:
 	 * Ex: str.reverse(); 
 	 */
 	string reverse();
+	
+	/*
+	 * Zips two strings together, like a zipper
+	 * Ex: str1.zip(str2) 
+	 */
+	string zip(const string&);
 
 	/*
 	 * Compares the length of the strings and returns bool

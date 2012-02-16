@@ -130,6 +130,30 @@ string string::reverse()
 }
 
 /*
+ * Zips two strings together, like a zipper
+ * Ex: str1.zip(str2) 
+ */
+string string::zip(const string& rhs)
+{
+	string result;
+	int lhs_count = length() - 1,
+		rhs_count = rhs.length() - 1,
+		i = 0;
+
+	do {
+		if (i <= lhs_count)
+			result += s[i]; 
+
+		if (i <= rhs_count)
+			result += rhs.s[i];
+
+		++i;
+	} while (i <= (lhs_count + rhs_count));
+
+	return result;
+}
+
+/*
  * Compares the length of the strings and returns bool
  * Ex: str < str2; 
  * Ex: str <= str2; 
