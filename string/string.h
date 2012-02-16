@@ -56,24 +56,6 @@ public:
 	char& operator[](const int);
 
 	/*
-	 * Returns the length of the string
-	 * Ex: str.length(); 
-	 */
-	int length() const;
-
-	/*
-	 * Reverses the content of a string
-	 * Ex: str.reverse(); 
-	 */
-	string reverse();
-	
-	/*
-	 * Zips two strings together, like a zipper
-	 * Ex: str1.zip(str2) 
-	 */
-	string zip(const string&);
-
-	/*
 	 * Compares the length of the strings and returns bool
 	 * Ex: str < str2; 
 	 * Ex: str <= str2; 
@@ -97,13 +79,36 @@ public:
 	 * Ex: str1 += str2; 
 	 */
 	string operator+=(const string&);
-	string operator+=(const char[]);
 
 	/*
 	 * Multiples the contents of a string by integer
 	 * Ex: str1 = str2 * 5; 
 	 */
 	string operator*(const int);
+
+	/*
+	 * Returns the length of the string
+	 * Ex: str.length(); 
+	 */
+	int length() const;
+
+	/*
+	 * Reverses the content of a string
+	 * Ex: str.reverse(); 
+	 */
+	string reverse();
+	
+	/*
+	 * Zips two strings together, like a zipper
+	 * Ex: str1.zip(str2) 
+	 */
+	string zip(const string&);
+
+	/*
+	 * Strips newlines from strings
+	 * Ex: str.nl_strip(); 
+	 */
+	string strip_nl();
 
 private:
 	char s[MAX_SIZE];

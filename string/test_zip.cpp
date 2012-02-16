@@ -11,6 +11,21 @@ int main ()
 {
 	{
 		// Setup
+		string str1,
+			   str2,
+			   result;
+
+		// Test
+		result = str1.zip(str2);
+
+		// Verify
+		assert(str1 == "");
+		assert(str2 == "");
+		assert(result == "");
+	}
+
+	{
+		// Setup
 		string str1 = "vim",
 			   str2 = "vim",
 			   result;

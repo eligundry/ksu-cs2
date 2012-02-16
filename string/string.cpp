@@ -3,7 +3,6 @@
  * Date        : 02/15/2012
  * Name        : string
  * Description : My own implementation of the string datatype
- *
  */
 
 #include "string.h"
@@ -100,6 +99,97 @@ char& string::operator[](const int spot)
 }
 
 /*
+ * Compares the length of the strings and returns bool
+ * Ex: str < str2; 
+ * Ex: str <= str2; 
+ * Ex: str > str2;
+ * Ex: str >= str2;
+ */
+bool string::operator<(const string& rhs) const
+{
+	return length() < rhs.length();
+}
+
+bool string::operator<=(const string& rhs) const
+{
+	return length() <= rhs.length();
+}
+
+bool string::operator>(const string& rhs) const
+{
+	return length() > rhs.length();
+}
+
+bool string::operator>=(const string& rhs) const
+{
+	return length() >= rhs.length();
+}
+
+/*
+ * Adds two strings together
+ * Ex: str = str1 + str2; 
+ */
+string string::operator+(const string& rhs)
+{
+	string result = *this;
+
+    for (int i = length(), x = 0, count = length() + rhs.length(); i <= count; ++i, ++x) {
+		result.s[i] = rhs.s[x];
+    }
+
+	return result;
+}
+
+string string::operator+(const char rhs[])
+{
+	string str_rhs = rhs,
+		   result = *this;
+
+    for (int i = length(), x = 0, count = length() + str_rhs.length(); i <= count; ++i, ++x) {
+		result.s[i] = str_rhs.s[x];
+    }
+
+	return result;
+}
+
+/*
+ * Adds string to current string
+ * Ex: str1 += str2; 
+ */
+string string::operator+=(const string& rhs)
+{
+    for (int i = length(), x = 0, count = length() + rhs.length(); i <= count; ++i, ++x) {
+		s[i] = rhs.s[x];
+    }
+
+	return *this;
+}
+
+/*
+ * Multiples the contents of a string by integer
+ * Ex: str1 = str2 * 5; 
+ */
+string string::operator*(int x)
+{
+	switch (x) {
+		case 0:
+			return "";
+			break;
+		case 1:
+			return *this;
+			break;
+		default:
+			string result;
+
+			for (int i = 1; i <= x; i++) {
+				result += *this;
+			}
+
+			return result;
+	}
+}
+
+/*
  * Returns the length of the string
  * Ex: str.length(); 
  */
@@ -154,104 +244,19 @@ string string::zip(const string& rhs)
 }
 
 /*
- * Compares the length of the strings and returns bool
- * Ex: str < str2; 
- * Ex: str <= str2; 
- * Ex: str > str2;
- * Ex: str >= str2;
+ * Strips newlines from strings
+ * Ex: str.nl_strip(); 
  */
-bool string::operator<(const string& rhs) const
+string string::strip_nl()
 {
-	return length() < rhs.length();
-}
+	string result;
 
-bool string::operator<=(const string& rhs) const
-{
-	return length() <= rhs.length();
-}
-
-bool string::operator>(const string& rhs) const
-{
-	return length() > rhs.length();
-}
-
-bool string::operator>=(const string& rhs) const
-{
-	return length() >= rhs.length();
-}
-
-
-/*
- * Adds two strings together
- * Ex: str = str1 + str2; 
- */
-string string::operator+(const string& rhs)
-{
-	string result = *this;
-
-    for (int i = length(), x = 0, count = length() + rhs.length(); i <= count; ++i, ++x) {
-		result.s[i] = rhs.s[x];
-    }
-
-	return result;
-}
-
-string string::operator+(const char rhs[])
-{
-	string str_rhs = rhs,
-		   result = *this;
-
-    for (int i = length(), x = 0, count = length() + str_rhs.length(); i <= count; ++i, ++x) {
-		result.s[i] = str_rhs.s[x];
-    }
-
-	return result;
-}
-
-/*
- * Adds string to current string
- * Ex: str1 += str2; 
- */
-string string::operator+=(const string& rhs)
-{
-    for (int i = length(), x = 0, count = length() + rhs.length(); i <= count; ++i, ++x) {
-		s[i] = rhs.s[x];
-    }
-
-	return *this;
-}
-
-string string::operator+=(const char rhs[])
-{
-	string str_rhs = rhs;
-
-    for (int i = length(), x = 0, count = length() + str_rhs.length(); i <= count; ++i, ++x) {
-		s[i] = str_rhs.s[x];
-    }
-
-	return *this;
-}
-
-/*
- * Multiples the contents of a string by integer
- * Ex: str1 = str2 * 5; 
- */
-string string::operator*(int x)
-{
-	switch (x) {
-		case 0:
-			return "";
-			break;
-		case 1:
-			return *this;
-			break;
-		default:
-			string result;
-
-			for (int i = 1; i <= x; i++) {
-				result += *this;
-			}
-
-			return result;
+	for (int i = 0; i < length(); ++i) {
+		if (s[i] != '\n') {
+			result += s[i];
+		}
 	}
+
+	return result;
 }
+
