@@ -4,7 +4,7 @@
 CPP     = g++
 OPTIONS = -g -Wall -W -Wunused -Wuninitialized -Wshadow 
 
-EXE1 = test_default_ctor test_c_str_ctor test_subscript test_length
+EXE1 = test_default_ctor test_c_str_ctor test_subscript test_length test_less_than test_greater_than
 EXE2 = 
 
 #==============================================================
@@ -22,6 +22,8 @@ string: $(EXE1) $(EXE2)
 	./test_c_str_ctor
 	./test_subscript
 	./test_length
+	./test_less_than
+	./test_greater_than
 
 #==============================================================
 # string type
@@ -51,4 +53,5 @@ clean:
 	rm -f *.o
 	rm -f test_default_ctor test_c_str_ctor
 	rm -f test_length test_subscript
+	rm -f test_less_than test_greater_than
 

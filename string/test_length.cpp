@@ -21,6 +21,16 @@ int main ()
 	}
 
 	{
+		string str('a');
+		assert(str.length() == 1);
+	}
+
+	{
+		string str("a");
+		assert(str.length() == 1);
+	}
+
+	{
         //------------------------------------------------------
         // SETUP FIXTURE
 
