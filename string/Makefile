@@ -4,7 +4,7 @@
 CPP     = g++
 OPTIONS = -g -Wall -W -Wunused -Wuninitialized -Wshadow 
 
-EXE1 = test_default_ctor test_c_str_ctor
+EXE1 = test_default_ctor test_c_str_ctor test_subscript test_length
 EXE2 = 
 
 #==============================================================
@@ -20,6 +20,8 @@ msg:
 string: $(EXE1) $(EXE2)
 	./test_default_ctor
 	./test_c_str_ctor
+	./test_subscript
+	./test_length
 
 #==============================================================
 # string type
@@ -31,9 +33,6 @@ string.o: string.h string.cpp
 #----------------------------------------------------------------------------
 test_%: string.o test_%.o
 	$(CPP) string.o test_$*.o -o test_$*
-
-test_default_ctor: string.o test_default_ctor.o
-	$(CPP) string.o test_default_ctor.o -o test_default_ctor
 
 test_%.o: string.h test_%.cpp
 	$(CPP) $(OPTIONS) -c test_$*.cpp

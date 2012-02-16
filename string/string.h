@@ -21,8 +21,37 @@ public:
 	 * Ex: string str; 
 	 */
 	string();
-	bool operator==(const string&);
-	char operator[](const int);
+
+	/*
+	 * Initalizes string to a single char passed to it
+	 * Ex: string str('a'); 
+	 */
+	string(const char ch);
+
+	/*
+	 * Initalizes string to a character array passed to it
+	 * Ex: string str("It's over 9000!"); 
+	 */
+	string(const char[]);
+
+	/*
+	 * Tests equality between two strings
+	 * Ex: str == str2; 
+	 */
+	bool operator==(const string&) const;
+
+	/*
+	 * Returns the character from the specified spot in the string
+	 * Ex: str[3]; 
+	 */
+	char operator[](const int) const;
+	char& operator[](const int);
+
+	/*
+	 * Returns the length of the string
+	 * Ex: str.length(); 
+	 */
+	int length() const;
 
 private:
 	char s[MAX_SIZE];
