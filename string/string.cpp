@@ -173,6 +173,8 @@ string string::operator-(const int x)
 {
 	if (x <= 0) {
 		return *this;
+	} else if (x >= length()) {
+		return "";
 	} else {
 		string result;
 
@@ -182,6 +184,11 @@ string string::operator-(const int x)
 
 		return result;
 	}
+}
+
+string string::operator-=(const int x)
+{
+	return *this = *this - x;
 }
 
 /*
@@ -199,6 +206,11 @@ string string::operator-(const char ch)
     }
 
 	return result;
+}
+
+string string::operator-=(const char ch)
+{
+	return *this = *this - ch;
 }
 
 /*
@@ -222,6 +234,11 @@ string string::operator-(const string& str)
 	}
 
 	return result;
+}
+
+string string::operator-=(const string& str)
+{
+	return *this = *this - str;
 }
 
 /*
@@ -251,23 +268,7 @@ string string::operator*(const int x)
  */
 string string::operator*=(const int x)
 {
-
-	switch (x) {
-		case 0:
-			return *this = "";
-			break;
-		case 1:
-			return *this;
-			break;
-		default:
-			string result;
-
-			for (int i = 0; i < x; ++i) {
-				result += *this;
-			}
-
-			return *this = result;
-	}
+	return *this = *this * x;
 }
 
 /*
@@ -331,15 +332,7 @@ string string::zip(const string& rhs)
  */
 string string::strip_nl()
 {
-	string result;
-
-	for (int i = 0; i < length(); ++i) {
-		if (s[i] != '\n') {
-			result += s[i];
-		}
-	}
-
-	return result;
+	return *this - '\n';
 }
 
 string string::strip_nl(const string& replacement)
@@ -364,13 +357,7 @@ string string::strip_nl(const string& replacement)
  */
 string string::repeat(const int x)
 {
-	string result;
-
-	for (int i = 0; i < x; ++i) {
-		result += *this;
-	}
-
-	return result;
+	return *this * x;
 }
 
 string string::repeat(const int x, const string& seperator)

@@ -118,17 +118,20 @@ int main ()
 		string str1 = "Yep",
 			   result1 = str1,
 			   result2 = str1,
-			   result3 = str1;
+			   result3 = str1,
+			   result4 = str1;
 
 		// Test
 		result1 *= 0;
 		result2 *= 1;
 		result3 *= 5;
+		result4 *= -3;
 
 		// Verify
 		assert(str1 == "Yep");
 		assert(result1 == "");
 		assert(result2 == "Yep");
 		assert(result3 == "YepYepYepYepYep");
+		assert(result4 == "");
 	}
 }

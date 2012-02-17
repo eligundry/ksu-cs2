@@ -13,16 +13,21 @@ int main ()
 		// Setup
 		string str1 = "Visable. Not visable.",
 			   result1,
-			   result2;
+			   result2,
+			   result3;
 
 		// Test
 		result1 = str1 - 13; 
 		result2 = str1 - (-13);
+		result3 = str1 - 1000;
 
 		// Verify
 		assert(str1 == "Visable. Not visable.");
 		assert(result1 == "Visable.");
 		assert(result2 == "Visable. Not visable.");
+		assert(result3 == "");
+		str1 -= 13;
+		assert(str1 == "Visable.");
 	}
 
 	{
@@ -37,6 +42,8 @@ int main ()
 		// Verify
 		assert(remove == 'd');
 		assert(str1 == "defense! defense! defense!");
+		str1 -= remove;
+		assert(str1 == "efense! efense! efense!");
 		assert(result == "efense! efense! efense!");
 	}
 
@@ -52,6 +59,23 @@ int main ()
 		// Verify
 		assert(remove == "de");
 		assert(str1 == "defense! defense! defense!");
+		str1 -= remove;
+		assert(str1 == "fense! fense! fense!");
 		assert(result == "fense! fense! fense!");
+	}
+
+	{
+		// Setup
+		string str1 = "thisthat",
+			   result;
+
+		// Test
+		result = str1 - "this";
+
+		// Verify
+		assert(str1 == "thisthat");
+		str1 -= "that";
+		assert(str1 == "this");
+		assert(result == "that");
 	}
 }
