@@ -185,26 +185,63 @@ string string::operator-(const int x)
 }
 
 /*
+ * Subtracts a specified char from string
+ * Ex: str - '\n'; 
+ */
+string string::operator-(const char ch)
+{
+	string result;
+
+    for (int i = 0; i < length(); ++i) {
+		if (s[i] != ch) {
+			result += s[i];
+		}
+    }
+
+	return result;
+}
+
+/*
+ * Subtracts specified string from string
+ * Ex: str - "this"; 
+ */
+string string::operator-(const string& str)
+{
+	string result;
+
+	for (int i = 0, j = 0; i < length(); ++i, j = 0) {
+		while (s[i + j] == str.s[j] && j <= str.length()) {
+			++j;
+
+			if (j == str.length()) {
+				i = i + j;
+			}
+		}
+
+		result += s[i];
+	}
+
+	return result;
+}
+
+/*
  * Multiples the contents of a string by integer
  * Ex: str1 = str2 * 5; 
  */
 string string::operator*(const int x)
 {
-	switch (x) {
-		case 0:
-			return "";
-			break;
-		case 1:
-			return *this;
-			break;
-		default:
-			string result;
+	if (x <= 0) {
+		return "";
+	} else if (x == 1) {
+		return *this;
+	} else {
+		string result;
 
-			for (int i = 1; i <= x; i++) {
-				result += *this;
-			}
+		for (int i = 1; i <= x; i++) {
+			result += *this;
+		}
 
-			return result;
+		return result;
 	}
 }
 

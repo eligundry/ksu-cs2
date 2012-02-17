@@ -87,6 +87,18 @@ public:
 	string operator-(const int);
 
 	/*
+	 * Subtracts a specified char from string
+	 * Ex: str - '\n'; 
+	 */
+	string operator-(const char);
+
+	/*
+	 * Subtracts specified string from string
+	 * Ex: str - "this"; 
+	 */
+	string operator-(const string&);
+
+	/*
 	 * Multiples the contents of a string by integer
 	 * Ex: str1 = str2 * 5; 
 	 */

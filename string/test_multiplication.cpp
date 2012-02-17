@@ -28,6 +28,19 @@ int main ()
 			   result;
 
 		// Test
+		result = str1 * -1;
+
+		// Verify
+		assert(str1 == "a");
+		assert(result == "");
+	}
+
+	{
+		// Setup
+		string str1('a'),
+			   result;
+
+		// Test
 		result = str1 * 0;
 
 		// Verify
