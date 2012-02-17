@@ -147,6 +147,14 @@ public:
 	string repeat(const int);
 	string repeat(const int, const string&);
 
+	/*
+	 * Returns extracted part of a string
+	 * Ex: str1.substr(1);
+	 * Ex: str1.substr(1, 3); 
+	 */
+	string substr(const int);
+	string substr(const int, const int);
+
 private:
 	char s[MAX_SIZE];
 };

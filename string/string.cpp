@@ -370,3 +370,38 @@ string string::repeat(const int x, const string& seperator)
 
 	return result;
 }
+
+/*
+ * Returns extracted part of a string
+ * Ex: str1.substr(1);
+ * Ex: str1.substr(1, 3); 
+ */
+string string::substr(const int start)
+{
+	if (start == 0) {
+		return *this;
+	} else {
+		string result;
+
+		for (int i = start; i < length(); ++i) {
+			result += s[i];
+		}
+
+		return result;
+	}
+}
+
+string string::substr(const int start, const int end)
+{
+	if (start == 0) {
+		return *this - (length() - end);
+	} else {
+		string result;
+
+		for (int i = start; i < end; ++i) {
+			result += s[i];
+		}
+
+		return result;
+	}
+}
