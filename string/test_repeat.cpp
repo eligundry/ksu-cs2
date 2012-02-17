@@ -79,5 +79,6 @@ int main ()
 		assert(str1 == "Danger!");
 		assert(str2 == "Will Robinson");
 		assert(result == "Danger!\nDanger!\nWill Robinson");
+		assert(result.strip_nl() == "Danger!Danger!Will Robinson");
 	}
 }

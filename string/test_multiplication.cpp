@@ -99,4 +99,23 @@ int main ()
 		assert(str1 == "Yep");
 		assert(result == "NopeYepYepYepYepYep");
 	}
+
+	{
+		// Setup
+		string str1 = "Yep",
+			   result1 = str1,
+			   result2 = str1,
+			   result3 = str1;
+
+		// Test
+		result1 *= 0;
+		result2 *= 1;
+		result3 *= 5;
+
+		// Verify
+		assert(str1 == "Yep");
+		assert(result1 == "");
+		assert(result2 == "Yep");
+		assert(result3 == "YepYepYepYepYep");
+	}
 }

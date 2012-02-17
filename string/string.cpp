@@ -166,10 +166,29 @@ string string::operator+=(const string& rhs)
 }
 
 /*
+ * Subtracts x number of chars from string
+ * Ex: str - 5; 
+ */
+string string::operator-(const int x)
+{
+	if (x <= 0) {
+		return *this;
+	} else {
+		string result;
+
+		for (int i = 0; i < (length() - x); ++i) {
+			result += s[i];
+		}
+
+		return result;
+	}
+}
+
+/*
  * Multiples the contents of a string by integer
  * Ex: str1 = str2 * 5; 
  */
-string string::operator*(int x)
+string string::operator*(const int x)
 {
 	switch (x) {
 		case 0:
@@ -186,6 +205,31 @@ string string::operator*(int x)
 			}
 
 			return result;
+	}
+}
+
+/*
+ * Multiples the contents of the string and appends it to that string
+ * Ex: str1 *= 5; 
+ */
+string string::operator*=(const int x)
+{
+
+	switch (x) {
+		case 0:
+			return *this = "";
+			break;
+		case 1:
+			return *this;
+			break;
+		default:
+			string result;
+
+			for (int i = 0; i < x; ++i) {
+				result += *this;
+			}
+
+			return *this = result;
 	}
 }
 
@@ -245,7 +289,8 @@ string string::zip(const string& rhs)
 
 /*
  * Strips newlines from strings
- * Ex: str.nl_strip(); 
+ * Ex: str.strip_nl(); 
+ * Ex: str.strip_nl(". ");
  */
 string string::strip_nl()
 {
@@ -256,6 +301,21 @@ string string::strip_nl()
 			result += s[i];
 		}
 	}
+
+	return result;
+}
+
+string string::strip_nl(const string& replacement)
+{
+	string result;
+
+    for (int i = 0; i < length(); ++i) {
+		if (s[i] != '\n') {
+			result += s[i];
+		} else {
+			result += replacement;
+		}
+    }
 
 	return result;
 }
@@ -281,8 +341,7 @@ string string::repeat(const int x, const string& seperator)
 	string result;
 
 	for (int i = 0; i < x; ++i) {
-		result += *this;
-		result += seperator;
+		result += *this + seperator;
 	}
 
 	return result;

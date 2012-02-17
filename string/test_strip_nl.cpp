@@ -11,6 +11,19 @@ int main ()
 {
 	{
 		// Setup
+		string str1,
+			   result;
+
+		// Test
+		result = str1.strip_nl();
+
+		// Verify
+		assert(str1 == "");
+		assert(result == "");
+	}
+
+	{
+		// Setup
 		string str1 = "This string has no new lines",
 			   result;
 
@@ -46,5 +59,19 @@ int main ()
 		// Verify
 		assert(str1 == "This is line 1\nThis is line 2");
 		assert(result == "This is line 1This is line 2");
+	}
+
+	{
+		// Setup
+		string str1 = "This is line 1\nThis is line 2",
+			   replacement = ". ",
+			   result;
+
+		// Test
+		result = str1.strip_nl(replacement);
+
+		// Verify
+		assert(str1 == "This is line 1\nThis is line 2");
+		assert(result == "This is line 1. This is line 2");
 	}
 }

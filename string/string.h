@@ -81,10 +81,22 @@ public:
 	string operator+=(const string&);
 
 	/*
+	 * Subtracts x number of chars from string
+	 * Ex: str - 5; 
+	 */
+	string operator-(const int);
+
+	/*
 	 * Multiples the contents of a string by integer
 	 * Ex: str1 = str2 * 5; 
 	 */
 	string operator*(const int);
+
+	/*
+	 * Multiples the contents of the string and appends it to that string
+	 * Ex: str1 *= 5; 
+	 */
+	string operator*=(const int);
 
 	/*
 	 * Returns the length of the string
@@ -105,10 +117,12 @@ public:
 	string zip(const string&);
 
 	/*
-	 * Strips newlines from strings
-	 * Ex: str.nl_strip(); 
+	 * Strips newlines from strings with optional replacement string
+	 * Ex: str.strip_nl(); 
+	 * Ex: str.strip_nl(". ");
 	 */
 	string strip_nl();
+	string strip_nl(const string&);
 
 	/*
 	 * Repeats a string a specified number of times with optional seperator
