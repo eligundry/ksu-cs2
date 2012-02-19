@@ -272,6 +272,19 @@ string string::operator*=(const int x)
 }
 
 /*
+ * Outputs string with << operator
+ * Ex: std::cout << str1;  
+ */
+ostream& operator<<(ostream& out, string& str)
+{
+	for (int i = 0; i < str.length(); ++i) {
+		out << str.s[i];
+	}
+
+	return out;
+}
+
+/*
  * Returns the length of the string
  * Ex: str.length(); 
  */

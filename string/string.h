@@ -11,6 +11,9 @@
 
 #include <iostream>
 
+using std::ostream;
+using std::istream;
+
 const int MAX_SIZE = 1000;
 
 class string 
@@ -112,6 +115,12 @@ public:
 	 * Ex: str1 *= 5; 
 	 */
 	string operator*=(const int);
+	
+	/*
+	 * Outputs string with << operator
+	 * Ex: std::cout << str1;  
+	 */
+	friend ostream& operator<<(ostream&, string&);
 
 	/*
 	 * Returns the length of the string
