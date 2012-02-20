@@ -142,14 +142,8 @@ string string::operator+(const string& rhs)
 
 string string::operator+(const char rhs[])
 {
-	string str_rhs = rhs,
-		   result = *this;
-
-    for (int i = length(), x = 0, count = length() + str_rhs.length(); i <= count; ++i, ++x) {
-		result.s[i] = str_rhs.s[x];
-    }
-
-	return result;
+	string str_rhs = rhs;
+	return *this + str_rhs;
 }
 
 /*
@@ -158,11 +152,7 @@ string string::operator+(const char rhs[])
  */
 string string::operator+=(const string& rhs)
 {
-    for (int i = length(), x = 0, count = length() + rhs.length(); i <= count; ++i, ++x) {
-		s[i] = rhs.s[x];
-    }
-
-	return *this;
+	return *this = *this + rhs;
 }
 
 /*
@@ -275,13 +265,20 @@ string string::operator*=(const int x)
  * Outputs string with << operator
  * Ex: std::cout << str1;  
  */
-ostream& operator<<(ostream& out, string& str)
+std::ostream& operator<<(std::ostream& out, const string& str)
 {
-	for (int i = 0; i < str.length(); ++i) {
-		out << str.s[i];
-	}
-
+	out << str.s;
 	return out;
+}
+
+/*
+ * Inputs string from keyboard with >> operator
+ * Ex: std::cin >> str1; 
+ */
+std::istream& operator>>(std::istream& in, const string& str)
+{
+	in >> str.s;
+	return in;
 }
 
 /*
@@ -300,10 +297,51 @@ int string::length() const
 }
 
 /*
+ * Returns the number of occurrences of a char in a string
+ * Ex: str1.findchar(); 
+ */
+int string::findchar(const char ch) const
+{
+	int times = 0;
+
+	for (int i = 0; i < length(); ++i) {
+		if (s[i] == ch) {
+			++times;
+		}
+	}
+
+	return times;
+}
+
+/*
+ * Returns the number of occurances of a string inside of a string
+ * Ex: str1.findstr("this"); 
+ */
+int string::findstr(const string& find) const
+{
+	int times = 0,
+		this_length = length(),
+		find_length = find.length();
+
+    for (int i = 0, j = 0; i < this_length; ++i, j = 0) {
+		while (s[i + j] == find.s[j] && j <= find_length) {
+			++j;
+
+			if (j == find_length) {
+				++times;
+				i = i + j;
+			}
+		}
+    }
+
+	return times;
+}
+
+/*
  * Reverses the content of a string
  * Ex: str.reverse(); 
  */
-string string::reverse()
+string string::reverse() const
 {
 	string result;
 
@@ -318,7 +356,7 @@ string string::reverse()
  * Zips two strings together, like a zipper
  * Ex: str1.zip(str2) 
  */
-string string::zip(const string& rhs)
+string string::zip(const string& rhs) const
 {
 	string result;
 	int lhs_count = length() - 1,
@@ -389,7 +427,7 @@ string string::repeat(const int x, const string& seperator)
  * Ex: str1.substr(1);
  * Ex: str1.substr(1, 3); 
  */
-string string::substr(const int start)
+string string::substr(const int start) const
 {
 	if (start == 0) {
 		return *this;

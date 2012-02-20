@@ -11,9 +11,6 @@
 
 #include <iostream>
 
-using std::ostream;
-using std::istream;
-
 const int MAX_SIZE = 1000;
 
 class string 
@@ -120,7 +117,13 @@ public:
 	 * Outputs string with << operator
 	 * Ex: std::cout << str1;  
 	 */
-	friend ostream& operator<<(ostream&, string&);
+	friend std::ostream& operator<<(std::ostream&, const string&);
+
+	/*
+	 * Inputs string from keyboard with >> operator
+	 * Ex: std::cin >> str1; 
+	 */
+	friend std::istream& operator>>(std::istream&, const string&);
 
 	/*
 	 * Returns the length of the string
@@ -129,16 +132,28 @@ public:
 	int length() const;
 
 	/*
+	 * Returns the number of occurances of a char in a string
+	 * Ex: str1.findchar(); 
+	 */
+	int findchar(const char) const;
+
+	/*
+	 * Returns the number of occurances of a string inside of a string
+	 * Ex: str1.findstr("this"); 
+	 */
+	int findstr(const string&) const;
+
+	/*
 	 * Reverses the content of a string
 	 * Ex: str.reverse(); 
 	 */
-	string reverse();
+	string reverse() const;
 	
 	/*
 	 * Zips two strings together, like a zipper
 	 * Ex: str1.zip(str2) 
 	 */
-	string zip(const string&);
+	string zip(const string&) const;
 
 	/*
 	 * Strips newlines from strings with optional replacement string
@@ -161,7 +176,7 @@ public:
 	 * Ex: str1.substr(1);
 	 * Ex: str1.substr(1, 3); 
 	 */
-	string substr(const int);
+	string substr(const int) const;
 	string substr(const int, const int);
 
 private:
