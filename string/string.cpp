@@ -42,19 +42,15 @@ string::string(const char str[])
 	s[i] = '\0';
 }
 
-string string::operator=(const char str[])
+/*
+ * Assignment operator for strings
+ * Ex: string str = "It's over 9000!"; 
+ */
+string string::operator=(const char ch[])
 {
-	int i = 0;
-
-	while (str[i] != '\0') {
-		s[i] = str[i];
-		++i;
-	}
-
-	s[i] = '\0';
-
-	return *this;
-}
+	string str(ch);
+	return *this = str;
+} 
 
 /*
  * Compares a string to another string
