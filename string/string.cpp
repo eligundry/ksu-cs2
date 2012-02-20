@@ -30,12 +30,12 @@ string::string(const char ch)
  * Initalizes string to a character array passed to it
  * Ex: string str("It's over 9000!"); 
  */
-string::string(const char str[])
+string::string(const char ch[])
 {
 	int i = 0;
 
-	while (str[i] != '\0') {
-		s[i] = str[i];
+	while (ch[i] != '\0') {
+		s[i] = ch[i];
 		++i;
 	}
 
@@ -129,9 +129,9 @@ string string::operator+(const string& rhs)
 {
 	string result = *this;
 
-    for (int i = length(), x = 0, count = length() + rhs.length(); i <= count; ++i, ++x) {
+	for (int i = length(), x = 0, count = length() + rhs.length(); i <= count; ++i, ++x) {
 		result.s[i] = rhs.s[x];
-    }
+	}
 
 	return result;
 }
@@ -188,11 +188,11 @@ string string::operator-(const char ch)
 	string result;
 	int this_length = length();
 
-    for (int i = 0; i < this_length; ++i) {
+	for (int i = 0; i < this_length; ++i) {
 		if (s[i] != ch) {
 			result += s[i];
 		}
-    }
+	}
 
 	return result;
 }
@@ -325,7 +325,7 @@ int string::findstr(const string& find) const
 		this_length = length(),
 		find_length = find.length();
 
-    for (int i = 0, j = 0; i < this_length; ++i, j = 0) {
+	for (int i = 0, j = 0; i < this_length; ++i, j = 0) {
 		while (s[i + j] == find.s[j] && j <= find_length) {
 			++j;
 
@@ -334,7 +334,7 @@ int string::findstr(const string& find) const
 				i = i + j;
 			}
 		}
-    }
+	}
 
 	return times;
 }
@@ -393,13 +393,13 @@ string string::strip_nl(const string& replacement)
 	string result;
 	int this_length = length();
 
-    for (int i = 0; i < this_length; ++i) {
+	for (int i = 0; i < this_length; ++i) {
 		if (s[i] != '\n') {
 			result += s[i];
 		} else {
 			result += replacement;
 		}
-    }
+	}
 
 	return result;
 }

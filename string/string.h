@@ -26,7 +26,7 @@ public:
 	 * Initalizes string to a single char passed to it
 	 * Ex: string str('a'); 
 	 */
-	string(const char ch);
+	string(const char);
 
 	/*
 	 * Initalizes string to a character array passed to it
@@ -46,7 +46,7 @@ public:
 	 * Ex: str != str2; 
 	 */
 	bool operator==(const string&) const;
-    bool operator!=(const string&) const;
+	bool operator!=(const string&) const;
 
 	/*
 	 * Returns the character from the specified spot in the string
