@@ -157,14 +157,16 @@ string string::operator+=(const string& rhs)
  */
 string string::operator-(const int x)
 {
+	int this_length = length();
+
 	if (x <= 0) {
 		return *this;
-	} else if (x >= length()) {
+	} else if (x >= this_length) {
 		return "";
 	} else {
 		string result;
 
-		for (int i = 0; i < (length() - x); ++i) {
+		for (int i = 0; i < (this_length - x); ++i) {
 			result += s[i];
 		}
 
@@ -184,8 +186,9 @@ string string::operator-=(const int x)
 string string::operator-(const char ch)
 {
 	string result;
+	int this_length = length();
 
-    for (int i = 0; i < length(); ++i) {
+    for (int i = 0; i < this_length; ++i) {
 		if (s[i] != ch) {
 			result += s[i];
 		}
@@ -206,12 +209,14 @@ string string::operator-=(const char ch)
 string string::operator-(const string& str)
 {
 	string result;
+	int lhs_length = length(),
+		rhs_length = str.length();
 
-	for (int i = 0, j = 0; i < length(); ++i, j = 0) {
-		while (s[i + j] == str.s[j] && j <= str.length()) {
+	for (int i = 0, j = 0; i < lhs_length; ++i, j = 0) {
+		while (s[i + j] == str.s[j] && j <= rhs_length) {
 			++j;
 
-			if (j == str.length()) {
+			if (j == rhs_length) {
 				i = i + j;
 			}
 		}
@@ -298,9 +303,10 @@ int string::length() const
  */
 int string::findchar(const char ch) const
 {
-	int times = 0;
+	int times = 0,
+		this_length = length();
 
-	for (int i = 0; i < length(); ++i) {
+	for (int i = 0; i < this_length; ++i) {
 		if (s[i] == ch) {
 			++times;
 		}
@@ -385,8 +391,9 @@ string string::strip_nl()
 string string::strip_nl(const string& replacement)
 {
 	string result;
+	int this_length = length();
 
-    for (int i = 0; i < length(); ++i) {
+    for (int i = 0; i < this_length; ++i) {
 		if (s[i] != '\n') {
 			result += s[i];
 		} else {
@@ -429,8 +436,9 @@ string string::substr(const int start) const
 		return *this;
 	} else {
 		string result;
+		int this_length = length();
 
-		for (int i = start; i < length(); ++i) {
+		for (int i = start; i < this_length; ++i) {
 			result += s[i];
 		}
 
