@@ -11,7 +11,7 @@ int main ()
 {
 	{
 		// Setup
-		string str1,
+		String str1,
 			   result;
 
 		// Test
@@ -24,7 +24,7 @@ int main ()
 
 	{
 		// Setup
-		string str1 = "This string has no new lines",
+		String str1 = "This string has no new lines",
 			   result;
 
 		// Test
@@ -37,7 +37,7 @@ int main ()
 
 	{
 		// Setup
-		string str1 = "\n",
+		String str1 = "\n",
 			   result;
 
 		// Test
@@ -50,7 +50,7 @@ int main ()
 
 	{
 		// Setup
-		string str1 = "This is line 1\nThis is line 2",
+		String str1 = "This is line 1\nThis is line 2",
 			   result;
 
 		// Test
@@ -63,7 +63,7 @@ int main ()
 
 	{
 		// Setup
-		string str1 = "This is line 1\nThis is line 2",
+		String str1 = "This is line 1\nThis is line 2",
 			   replacement = ". ",
 			   result;
 

@@ -14,7 +14,7 @@ int main ()
         // SETUP FIXTURE
 
         // TEST
-        string str('a');
+        String str('a');
 
         // VERIFY
         assert(str == "a");
@@ -25,7 +25,7 @@ int main ()
         // SETUP FIXTURE
 
         // TEST
-        string str("a");
+        String str("a");
 
         // VERIFY
         assert(str == "a");
@@ -36,7 +36,7 @@ int main ()
         // SETUP FIXTURE
 
         // TEST
-        string str("foobar");
+        String str("foobar");
 
         // VERIFY
         assert(str == "foobar");
@@ -47,7 +47,7 @@ int main ()
         // SETUP FIXTURE
 
         // TEST
-        string str("It's over 9000!");
+        String str("It's over 9000!");
 
         // VERIFY
         assert(str == "It's over 9000!");

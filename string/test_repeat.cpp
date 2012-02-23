@@ -11,7 +11,7 @@ int main ()
 {
 	{
 		// Setup
-		string str1,
+		String str1,
 			   result;
 
 		// Test
@@ -24,7 +24,7 @@ int main ()
 
 	{
 		// Setup
-		string str1,
+		String str1,
 			   sep = '\n',
 			   result;
 
@@ -39,7 +39,7 @@ int main ()
 
 	{
 		// Setup
-		string str1 = "Danger",
+		String str1 = "Danger",
 			   result;
 
 		// Test
@@ -52,7 +52,7 @@ int main ()
 
 	{
 		// Setup
-		string str1 = "Danger",
+		String str1 = "Danger",
 			   sep = "! ",
 			   result;
 
@@ -68,7 +68,7 @@ int main ()
 	{
 		// This one is just for me :)
 		// Setup
-		string str1 = "Danger!",
+		String str1 = "Danger!",
 			   str2 = "Will Robinson",
 			   result;
 

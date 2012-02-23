@@ -11,7 +11,7 @@ int main ()
 {
 	{
 		// Setup
-		string str1;
+		String str1;
 
 		// Test & Verify
 		assert(str1 == "");
@@ -21,7 +21,7 @@ int main ()
 
 	{
 		// Setup
-		string str1 = "This is a test";
+		String str1 = "This is a test";
 
 		// Test & Verify
 		assert(str1 == "This is a test");

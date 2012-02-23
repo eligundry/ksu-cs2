@@ -10,23 +10,34 @@
 int main ()
 {
 	{
-		string str;
+		// Setup
+		String str;
+
+		// Verify
 		assert(str[0] == '\0');
 	}
 
 	{
-		string str('a');
+		// Setup
+		String str('a');
+
+		// Verify
 		assert(str[0] == 'a');
 	}
 
 	{
-		string str("a");
+		// Setup
+		String str("a");
+
+		// Verify
 		assert(str[0] == 'a');
 	}
 
 	{
-		string str("It's over 9000!");
+		// Setup
+		String str("It's over 9000!");
 
+		// Verify
         assert(str[0] == 'I');
 		assert(str[2] == '\'');
 	}

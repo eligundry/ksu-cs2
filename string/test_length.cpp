@@ -14,30 +14,33 @@ int main ()
         // SETUP FIXTURE
 
         // TEST
-		string str;
+		String str;
 
         // VERIFY
         assert(str.length() == 0);
 	}
 
 	{
-		string str('a');
+		// Setup
+		String str('a');
+
+		// Verify
 		assert(str.length() == 1);
 	}
 
 	{
-		string str("a");
+		// Setup
+		String str("a");
+
+		// Verify
 		assert(str.length() == 1);
 	}
 
 	{
-        //------------------------------------------------------
-        // SETUP FIXTURE
+		// Test
+		String str("It's over 9000!");
 
-        // TEST
-		string str("It's over 9000!");
-
-        // VERIFY
+        // Verify
         assert(str.length() == 15);
 	}
 }

@@ -10,15 +10,21 @@
 int main ()
 {
 	{
-		string str1;
-		string str2('a');
+		// Setup
+		String str1,
+			   str2('a');
+
+		// Verify
 		assert(str1 < str2);
 		assert(str1 <= str2);
 	}
 
 	{
-		string str1("foo");
-		string str2("bar");
+		// Setup
+		String str1("foo"),
+			   str2("bar");
+
+		// Verify
 		assert(str1 <= str2);
 	}
 }

@@ -11,7 +11,7 @@ int main ()
 {
 	{
 		// Setup
-		string str1 = "Visable. Not visable.",
+		String str1 = "Visable. Not visable.",
 			   result1,
 			   result2,
 			   result3;
@@ -33,7 +33,7 @@ int main ()
 	{
 		// Setup
 		char remove = 'd';
-		string str1 = "defense! defense! defense!",
+		String str1 = "defense! defense! defense!",
 			   result;
 
 		// Test
@@ -49,7 +49,7 @@ int main ()
 
 	{
 		// Setup
-		string remove = "de",
+		String remove = "de",
 			   str1 = "defense! defense! defense!",
 			   result;
 
@@ -66,7 +66,7 @@ int main ()
 
 	{
 		// Setup
-		string str1 = "thisthat",
+		String str1 = "thisthat",
 			   result;
 
 		// Test

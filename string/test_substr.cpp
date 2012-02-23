@@ -11,7 +11,7 @@ int main ()
 {
 	{
 		// Setup
-		string str1 = "abcdefghijk",
+		String str1 = "abcdefghijk",
 			   result1,
 			   result2,
 			   result3,

@@ -11,7 +11,7 @@ int main ()
 {
 	{
 		// Setup
-		string str1('a'),
+		String str1('a'),
 			   result;
 
 		// Test
@@ -24,7 +24,7 @@ int main ()
 
 	{
 		// Setup
-		string str1("It's over 9000!"),
+		String str1("It's over 9000!"),
 			   result;
 
 		// Test
@@ -37,7 +37,7 @@ int main ()
 
 	{
 		// Setup
-		string str1 = "It's over 9000!",
+		String str1 = "It's over 9000!",
 			   result;
 
 		// Test

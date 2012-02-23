@@ -11,7 +11,7 @@ int main ()
 {
 	{
 		// Setup
-		string str1,
+		String str1,
 			   str2,
 			   result;
 
@@ -26,7 +26,7 @@ int main ()
 
 	{
 		// Setup
-		string str1 = "vim",
+		String str1 = "vim",
 			   str2 = "vim",
 			   result;
 
@@ -41,7 +41,7 @@ int main ()
 
 	{
 		// Setup
-		string str1 = "vim",
+		String str1 = "vim",
 			   result;
 
 		// Test
@@ -54,7 +54,7 @@ int main ()
 
 	{
 		// Setup
-		string str1 = "vim",
+		String str1 = "vim",
 			   str2 = "emacs",
 			   result;
 
@@ -69,7 +69,7 @@ int main ()
 
 	{
 		// Setup
-		string str1 = "vim",
+		String str1 = "vim",
 			   result;
 
 		// Test
@@ -82,7 +82,7 @@ int main ()
 
 	{
 		// Setup
-		string str1 = "vim",
+		String str1 = "vim",
 			   result;
 
 		// Test

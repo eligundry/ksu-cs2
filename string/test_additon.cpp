@@ -11,7 +11,7 @@ int main ()
 {
 	{
 		// Setup
-		string str1,
+		String str1,
 			   str2,
 			   result;
 
@@ -26,7 +26,7 @@ int main ()
 
 	{
 		// Setup
-		string str1,
+		String str1,
 			   str2('b'),
 			   result;
 
@@ -41,7 +41,7 @@ int main ()
 
 	{
 		// Setup
-		string str1('a'),
+		String str1('a'),
 			   str2('b'),
 			   result;
 
@@ -56,7 +56,7 @@ int main ()
 
 	{
 		// Setup
-		string str1("a"),
+		String str1("a"),
 			   str2("b"),
 			   result;
 
@@ -71,7 +71,7 @@ int main ()
 
 	{
 		// Setup
-		string str1('a'),
+		String str1('a'),
 			   str2("b"),
 			   result;
 
@@ -86,7 +86,7 @@ int main ()
 
 	{
 		// Setup
-		string str1("a"),
+		String str1("a"),
 			   str2('b'),
 			   result;
 
@@ -101,7 +101,7 @@ int main ()
 
 	{
 		// Setup
-		string str1("This is a test. "),
+		String str1("This is a test. "),
 			   str2("It should pass."),
 			   result;
 
@@ -116,7 +116,7 @@ int main ()
 
 	{
 		// Setup
-		string str1("This is a test. "),
+		String str1("This is a test. "),
 			   result;
 
 		// Test
@@ -129,7 +129,7 @@ int main ()
 
 	{
 		// Setup
-		string str1("It's over 9000"),
+		String str1("It's over 9000"),
 			   result;
 
 		// Test
@@ -142,7 +142,7 @@ int main ()
 
 	{
 		// Setup
-		string str1("It's over 9000! "),
+		String str1("It's over 9000! "),
 			   str2("And that's really high!");
 
 		// Test
@@ -154,7 +154,7 @@ int main ()
 
 	{
 		// Setup
-		string str1("It's over 9000! ");
+		String str1("It's over 9000! ");
 
 		// Test
 		str1 += "And that's really high!";

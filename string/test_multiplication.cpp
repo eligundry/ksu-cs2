@@ -11,7 +11,7 @@ int main ()
 {
 	{
 		// Setup
-		string str1,
+		String str1,
 			   result;
 
 		// Test
@@ -24,7 +24,7 @@ int main ()
 
 	{
 		// Setup
-		string str1('a'),
+		String str1('a'),
 			   result;
 
 		// Test
@@ -37,7 +37,7 @@ int main ()
 
 	{
 		// Setup
-		string str1('a'),
+		String str1('a'),
 			   result;
 
 		// Test
@@ -50,7 +50,7 @@ int main ()
 
 	{
 		// Setup
-		string str1('a'),
+		String str1('a'),
 			   result;
 
 		// Test
@@ -63,7 +63,7 @@ int main ()
 
 	{
 		// Setup
-		string str1('a'),
+		String str1('a'),
 			   result;
 
 		// Test
@@ -76,7 +76,7 @@ int main ()
 
 	{
 		// Setup
-		string str1("Yep"),
+		String str1("Yep"),
 			   result;
 
 		// Test
@@ -89,7 +89,7 @@ int main ()
 
 	{
 		// Setup
-		string str1 = "Yep",
+		String str1 = "Yep",
 			   result;
 
 		// Test
@@ -102,7 +102,7 @@ int main ()
 
 	{
 		// Setup
-		string str1 = "Yep",
+		String str1 = "Yep",
 			   result = "Nope";
 
 		// Test
@@ -115,7 +115,7 @@ int main ()
 
 	{
 		// Setup
-		string str1 = "Yep",
+		String str1 = "Yep",
 			   result1 = str1,
 			   result2 = str1,
 			   result3 = str1,

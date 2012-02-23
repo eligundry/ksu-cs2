@@ -11,7 +11,7 @@ int main ()
 {
 	{
 		// Setup
-		string str1;
+		String str1;
 
 		// Test
 		str1 = 'a';
@@ -22,7 +22,7 @@ int main ()
 
 	{
 		// Setup
-		string str1;
+		String str1;
 
 		// Test
 		str1 = "This is a test.";
@@ -33,7 +33,7 @@ int main ()
 
 	{
 		// Setup & Test
-		string str1 = 'a';
+		String str1 = 'a';
 		
 		// Verify
 		assert(str1 == "a");
@@ -41,7 +41,7 @@ int main ()
 
 	{
 		// Setup & Test
-		string str1 = "This is a test.";
+		String str1 = "This is a test.";
 
 		// Verify
 		assert(str1 == "This is a test.");
