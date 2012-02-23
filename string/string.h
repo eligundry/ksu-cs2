@@ -3,7 +3,6 @@
  * Date        : 02/15/2012
  * Name        : string
  * Description : My own implementation of the string datatype's header file
- *
  */
 
 #ifndef CS33001_STRING_H
@@ -11,42 +10,42 @@
 
 #include <iostream>
 
-const int MAX_SIZE = 1000;
+#define default_size 128
 
-class string 
+class String 
 {
 public:
 	/*
 	 * Initalizes string to '\0'
 	 * Ex: string str; 
 	 */
-	string();
+	String();
 
 	/*
 	 * Initalizes string to a single char passed to it
 	 * Ex: string str('a'); 
 	 */
-	string(const char);
+	String(const char);
 
 	/*
 	 * Initalizes string to a character array passed to it
 	 * Ex: string str("It's over 9000!"); 
 	 */
-	string(const char[]);
+	String(const char[]);
 
 	/*
 	 * Assignment operator for strings
 	 * Ex: string str = "It's over 9000!"; 
 	 */
-	string operator=(const char[]);
+	String operator=(const char[]);
 
 	/*
 	 * Tests equality between two strings
 	 * Ex: str == str2; 
 	 * Ex: str != str2; 
 	 */
-	bool operator==(const string&) const;
-	bool operator!=(const string&) const;
+	bool operator==(const String&) const;
+	bool operator!=(const String&) const;
 
 	/*
 	 * Returns the character from the specified spot in the string
@@ -62,68 +61,68 @@ public:
 	 * Ex: str > str2;
 	 * Ex: str >= str2;
 	 */
-	bool operator<(const string&) const; 
-	bool operator<=(const string&) const; 
-	bool operator>(const string&) const; 
-	bool operator>=(const string&) const; 
+	bool operator<(const String&) const; 
+	bool operator<=(const String&) const; 
+	bool operator>(const String&) const; 
+	bool operator>=(const String&) const; 
 
 	/*
 	 * Adds two strings together
 	 * Ex: str = str1 + str2; 
 	 */
-	string operator+(const string&);
-	string operator+(const char[]);
+	String operator+(const String&);
+	String operator+(const char[]);
 
 	/*
 	 * Adds string to current string
 	 * Ex: str1 += str2; 
 	 */
-	string operator+=(const string&);
+	String operator+=(const String&);
 
 	/*
 	 * Subtracts x number of chars from string
 	 * Ex: str - 5; 
 	 */
-	string operator-(const int);
-	string operator-=(const int);
+	String operator-(const int);
+	String operator-=(const int);
 
 	/*
 	 * Subtracts a specified char from string
 	 * Ex: str - '\n'; 
 	 */
-	string operator-(const char);
-	string operator-=(const char);
+	String operator-(const char);
+	String operator-=(const char);
 
 	/*
 	 * Subtracts specified string from string
 	 * Ex: str - "this"; 
 	 */
-	string operator-(const string&);
-	string operator-=(const string&);
+	String operator-(const String&);
+	String operator-=(const String&);
 
 	/*
 	 * Multiples the contents of a string by integer
 	 * Ex: str1 = str2 * 5; 
 	 */
-	string operator*(const int);
+	String operator*(const int);
 
 	/*
 	 * Multiples the contents of the string and appends it to that string
 	 * Ex: str1 *= 5; 
 	 */
-	string operator*=(const int);
+	String operator*=(const int);
 	
 	/*
 	 * Outputs string with << operator
 	 * Ex: std::cout << str1;  
 	 */
-	friend std::ostream& operator<<(std::ostream&, const string&);
+	friend std::ostream& operator<<(std::ostream&, const String&);
 
 	/*
 	 * Inputs string from keyboard with >> operator
 	 * Ex: std::cin >> str1; 
 	 */
-	friend std::istream& operator>>(std::istream&, const string&);
+	friend std::istream& operator>>(std::istream&, const String&);
 
 	/*
 	 * Returns the length of the string
@@ -141,46 +140,47 @@ public:
 	 * Returns the number of occurances of a string inside of a string
 	 * Ex: str1.findstr("this"); 
 	 */
-	int findstr(const string&) const;
+	int findstr(const String&) const;
 
 	/*
 	 * Reverses the content of a string
 	 * Ex: str.reverse(); 
 	 */
-	string reverse() const;
+	String reverse() const;
 	
 	/*
 	 * Zips two strings together, like a zipper
 	 * Ex: str1.zip(str2) 
 	 */
-	string zip(const string&) const;
+	String zip(const String&) const;
 
 	/*
 	 * Strips newlines from strings with optional replacement string
 	 * Ex: str.strip_nl(); 
 	 * Ex: str.strip_nl(". ");
 	 */
-	string strip_nl();
-	string strip_nl(const string&);
+	String strip_nl();
+	String strip_nl(const String&);
 
 	/*
 	 * Repeats a string a specified number of times with optional seperator
 	 * Ex: str1.repeat(5);
 	 * Ex: str1.repeat(5, "\n"); 
 	 */
-	string repeat(const int);
-	string repeat(const int, const string&);
+	String repeat(const int);
+	String repeat(const int, const String&);
 
 	/*
 	 * Returns extracted part of a string
 	 * Ex: str1.substr(1);
 	 * Ex: str1.substr(1, 3); 
 	 */
-	string substr(const int) const;
-	string substr(const int, const int);
+	String substr(const int) const;
+	String substr(const int, const int);
 
 private:
-	char s[MAX_SIZE];
+	char *s;
+	int capacity;
 };
 
 #endif 

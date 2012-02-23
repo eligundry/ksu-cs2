@@ -11,8 +11,9 @@
  * Initalizes string to '\0'
  * Ex: string str(); 
  */
-string::string()
+String::String()
 {
+	s = new char[default_size]; 
 	s[0] = '\0';
 }
 
@@ -20,8 +21,9 @@ string::string()
  * Initalizes string to a single char passed to it
  * Ex: string str('a'); 
  */
-string::string(const char ch)
+String::String(const char ch)
 {
+	s = new char[2];
 	s[0] = ch;
 	s[1] = '\0';
 }
@@ -30,8 +32,10 @@ string::string(const char ch)
  * Initalizes string to a character array passed to it
  * Ex: string str("It's over 9000!"); 
  */
-string::string(const char ch[])
+String::String(const char ch[])
 {
+	s = new char[default_size];
+
 	int i = 0;
 
 	while (ch[i] != '\0') {
@@ -46,9 +50,9 @@ string::string(const char ch[])
  * Assignment operator for strings
  * Ex: string str = "It's over 9000!"; 
  */
-string string::operator=(const char ch[])
+String String::operator=(const char ch[])
 {
-	string str(ch);
+	String str(ch);
 	return *this = str;
 } 
 
@@ -57,7 +61,7 @@ string string::operator=(const char ch[])
  * Ex: str == other_str; 
  * Ex: str != other_str; 
  */
-bool string::operator==(const string& rhs) const 
+bool String::operator==(const String& rhs) const 
 {
 	int i = 0;
 
@@ -75,7 +79,7 @@ bool string::operator==(const string& rhs) const
 	}
 }
 
-bool string::operator!=(const string& rhs) const
+bool String::operator!=(const String& rhs) const
 {
 	return !(*this == rhs);
 }
@@ -84,12 +88,12 @@ bool string::operator!=(const string& rhs) const
  * Returns the character from the specified spot in the string
  * Ex: str[3]; 
  */
-char string::operator[](const int spot) const
+char String::operator[](const int spot) const
 {
 	return s[spot];
 }
 
-char& string::operator[](const int spot)
+char& String::operator[](const int spot)
 {
 	return s[spot];
 }
@@ -101,22 +105,22 @@ char& string::operator[](const int spot)
  * Ex: str > str2;
  * Ex: str >= str2;
  */
-bool string::operator<(const string& rhs) const
+bool String::operator<(const String& rhs) const
 {
 	return length() < rhs.length();
 }
 
-bool string::operator<=(const string& rhs) const
+bool String::operator<=(const String& rhs) const
 {
 	return length() <= rhs.length();
 }
 
-bool string::operator>(const string& rhs) const
+bool String::operator>(const String& rhs) const
 {
 	return length() > rhs.length();
 }
 
-bool string::operator>=(const string& rhs) const
+bool String::operator>=(const String& rhs) const
 {
 	return length() >= rhs.length();
 }
@@ -125,9 +129,9 @@ bool string::operator>=(const string& rhs) const
  * Adds two strings together
  * Ex: str = str1 + str2; 
  */
-string string::operator+(const string& rhs)
+String String::operator+(const String& rhs)
 {
-	string result = *this;
+	String result = *this;
 
 	for (int i = length(), x = 0, count = length() + rhs.length(); i <= count; ++i, ++x) {
 		result.s[i] = rhs.s[x];
@@ -136,9 +140,9 @@ string string::operator+(const string& rhs)
 	return result;
 }
 
-string string::operator+(const char rhs[])
+String String::operator+(const char rhs[])
 {
-	string str_rhs = rhs;
+	String str_rhs = rhs;
 	return *this + str_rhs;
 }
 
@@ -146,7 +150,7 @@ string string::operator+(const char rhs[])
  * Adds string to current string
  * Ex: str1 += str2; 
  */
-string string::operator+=(const string& rhs)
+String String::operator+=(const String& rhs)
 {
 	return *this = *this + rhs;
 }
@@ -155,7 +159,7 @@ string string::operator+=(const string& rhs)
  * Subtracts x number of chars from string
  * Ex: str - 5; 
  */
-string string::operator-(const int x)
+String String::operator-(const int x)
 {
 	int this_length = length();
 
@@ -164,7 +168,7 @@ string string::operator-(const int x)
 	} else if (x >= this_length) {
 		return "";
 	} else {
-		string result;
+		String result;
 
 		for (int i = 0; i < (this_length - x); ++i) {
 			result += s[i];
@@ -174,7 +178,7 @@ string string::operator-(const int x)
 	}
 }
 
-string string::operator-=(const int x)
+String String::operator-=(const int x)
 {
 	return *this = *this - x;
 }
@@ -183,9 +187,9 @@ string string::operator-=(const int x)
  * Subtracts a specified char from string
  * Ex: str - '\n'; 
  */
-string string::operator-(const char ch)
+String String::operator-(const char ch)
 {
-	string result;
+	String result;
 	int this_length = length();
 
 	for (int i = 0; i < this_length; ++i) {
@@ -197,7 +201,7 @@ string string::operator-(const char ch)
 	return result;
 }
 
-string string::operator-=(const char ch)
+String String::operator-=(const char ch)
 {
 	return *this = *this - ch;
 }
@@ -206,9 +210,9 @@ string string::operator-=(const char ch)
  * Subtracts specified string from string
  * Ex: str - "this"; 
  */
-string string::operator-(const string& str)
+String String::operator-(const String& str)
 {
-	string result;
+	String result;
 	int lhs_length = length(),
 		rhs_length = str.length();
 
@@ -227,7 +231,7 @@ string string::operator-(const string& str)
 	return result;
 }
 
-string string::operator-=(const string& str)
+String String::operator-=(const String& str)
 {
 	return *this = *this - str;
 }
@@ -236,14 +240,14 @@ string string::operator-=(const string& str)
  * Multiples the contents of a string by integer
  * Ex: str1 = str2 * 5; 
  */
-string string::operator*(const int x)
+String String::operator*(const int x)
 {
 	if (x <= 0) {
 		return "";
 	} else if (x == 1) {
 		return *this;
 	} else {
-		string result;
+		String result;
 
 		for (int i = 1; i <= x; i++) {
 			result += *this;
@@ -257,7 +261,7 @@ string string::operator*(const int x)
  * Multiples the contents of the string and appends it to that string
  * Ex: str1 *= 5; 
  */
-string string::operator*=(const int x)
+String String::operator*=(const int x)
 {
 	return *this = *this * x;
 }
@@ -266,7 +270,7 @@ string string::operator*=(const int x)
  * Outputs string with << operator
  * Ex: std::cout << str1;  
  */
-std::ostream& operator<<(std::ostream& out, const string& str)
+std::ostream& operator<<(std::ostream& out, const String& str)
 {
 	out << str.s;
 	return out;
@@ -276,7 +280,7 @@ std::ostream& operator<<(std::ostream& out, const string& str)
  * Inputs string from keyboard with >> operator
  * Ex: std::cin >> str1; 
  */
-std::istream& operator>>(std::istream& in, const string& str)
+std::istream& operator>>(std::istream& in, const String& str)
 {
 	in >> str.s;
 	return in;
@@ -286,7 +290,7 @@ std::istream& operator>>(std::istream& in, const string& str)
  * Returns the length of the string
  * Ex: str.length(); 
  */
-int string::length() const
+int String::length() const
 {
 	int i = 0;
 
@@ -301,7 +305,7 @@ int string::length() const
  * Returns the number of occurrences of a char in a string
  * Ex: str1.findchar(); 
  */
-int string::findchar(const char ch) const
+int String::findchar(const char ch) const
 {
 	int times = 0,
 		this_length = length();
@@ -319,7 +323,7 @@ int string::findchar(const char ch) const
  * Returns the number of occurances of a string inside of a string
  * Ex: str1.findstr("this"); 
  */
-int string::findstr(const string& find) const
+int String::findstr(const String& find) const
 {
 	int times = 0,
 		this_length = length(),
@@ -343,9 +347,9 @@ int string::findstr(const string& find) const
  * Reverses the content of a string
  * Ex: str.reverse(); 
  */
-string string::reverse() const
+String String::reverse() const
 {
-	string result;
+	String result;
 
 	for (int i = length(); i >= 0; --i) {
 		result += s[i];
@@ -358,9 +362,9 @@ string string::reverse() const
  * Zips two strings together, like a zipper
  * Ex: str1.zip(str2) 
  */
-string string::zip(const string& rhs) const
+String String::zip(const String& rhs) const
 {
-	string result;
+	String result;
 	int lhs_count = length() - 1,
 		rhs_count = rhs.length() - 1,
 		i = 0;
@@ -383,14 +387,14 @@ string string::zip(const string& rhs) const
  * Ex: str.strip_nl(); 
  * Ex: str.strip_nl(". ");
  */
-string string::strip_nl()
+String String::strip_nl()
 {
 	return *this - '\n';
 }
 
-string string::strip_nl(const string& replacement)
+String String::strip_nl(const String& replacement)
 {
-	string result;
+	String result;
 	int this_length = length();
 
 	for (int i = 0; i < this_length; ++i) {
@@ -409,14 +413,14 @@ string string::strip_nl(const string& replacement)
  * Ex: str1.repeat(5);
  * Ex: str1.repeat(5, "\n"); 
  */
-string string::repeat(const int x)
+String String::repeat(const int x)
 {
 	return *this * x;
 }
 
-string string::repeat(const int x, const string& seperator)
+String String::repeat(const int x, const String& seperator)
 {
-	string result;
+	String result;
 
 	for (int i = 0; i < x; ++i) {
 		result += *this + seperator;
@@ -430,12 +434,12 @@ string string::repeat(const int x, const string& seperator)
  * Ex: str1.substr(1);
  * Ex: str1.substr(1, 3); 
  */
-string string::substr(const int start) const
+String String::substr(const int start) const
 {
 	if (start == 0) {
 		return *this;
 	} else {
-		string result;
+		String result;
 		int this_length = length();
 
 		for (int i = start; i < this_length; ++i) {
@@ -446,12 +450,12 @@ string string::substr(const int start) const
 	}
 }
 
-string string::substr(const int start, const int end)
+String String::substr(const int start, const int end)
 {
 	if (start == 0) {
 		return *this - (length() - end);
 	} else {
-		string result;
+		String result;
 
 		for (int i = start; i < end; ++i) {
 			result += s[i];
