@@ -74,9 +74,9 @@ bool String::operator==(const String& rhs) const
 
 	if (rhs.s[i] == '\0') {
 		return true;
-	} else {
-		return false;
 	}
+
+	return false;
 }
 
 bool String::operator!=(const String& rhs) const
@@ -107,22 +107,33 @@ char& String::operator[](const int spot)
  */
 bool String::operator<(const String& rhs) const
 {
-	return length() < rhs.length();
+    bool lessThan = false;
+    int i = 0;
+    while ( (s[i] != '\0') && (rhs.s[i] != '\0') ){
+        if (s[i] > rhs.s[i]) return false;
+        if (s[i] < rhs.s[i]) lessThan = true;
+        ++i;
+    }
+    if (lessThan && (s[i] == '\0') && (rhs.s[i] == '\0')) return true;
+    if (lessThan && (rhs.s[i] == '\0')) return true;
+    if (!lessThan && (s[i] == '\0') && (rhs.s[i] == '\0')) return false;
+    if (s[i] == '\0') return true;
+    return false;
 }
 
 bool String::operator<=(const String& rhs) const
 {
-	return length() <= rhs.length();
+	return (*this < rhs) || (*this == rhs);
 }
 
 bool String::operator>(const String& rhs) const
 {
-	return length() > rhs.length();
+	return rhs < *this;
 }
 
 bool String::operator>=(const String& rhs) const
 {
-	return length() >= rhs.length();
+	return (rhs < *this) || (rhs == *this);
 }
 
 /*

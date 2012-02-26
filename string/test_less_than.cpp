@@ -11,20 +11,31 @@ int main ()
 {
 	{
 		// Setup
-		String str1,
-			   str2('a');
+		String str1 = "a",
+			   str2 = "z";
 
-		// Verify
+		// Test & Verify
 		assert(str1 < str2);
 		assert(str1 <= str2);
 	}
 
 	{
 		// Setup
-		String str1("foo"),
-			   str2("bar");
+		String str1 = "az",
+			   str2 = "za";
 
-		// Verify
+		// Test & Verify
+		assert(str1 < str2);
+		assert(str1 <= str2);
+	}
+
+	{
+		// Setup
+		String str1 = "az",
+			   str2 = "z";
+
+		// Test & Verify
+		assert(str1 < str2);
 		assert(str1 <= str2);
 	}
 }
