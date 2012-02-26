@@ -131,19 +131,27 @@ bool String::operator>=(const String& rhs) const
  */
 String String::operator+(const String& rhs)
 {
-	String result = *this;
+	String result;
+	int i,
+		lhs_length = length(),
+		rhs_length = rhs.length();
 
-	for (int i = length(), x = 0, count = length() + rhs.length(); i <= count; ++i, ++x) {
-		result.s[i] = rhs.s[x];
+	for (i = 0; i < lhs_length; ++i) {
+		result.s[i] = s[i];
+	}
+
+	for (int j = 0; i < lhs_length + rhs_length; ++j, ++i) {
+		result.s[i] = rhs.s[j];
 	}
 
 	return result;
-}
+} 
 
 String String::operator+(const char rhs[])
 {
 	String str_rhs = rhs;
 	return *this + str_rhs;
+
 }
 
 /*

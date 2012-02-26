@@ -41,8 +41,8 @@ int main ()
 
 	{
 		// Setup
-		String str1('a'),
-			   str2('b'),
+		String str1 = 'a',
+			   str2 = 'b',
 			   result;
 
 		// Test
