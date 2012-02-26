@@ -11,6 +11,15 @@ int main ()
 {
 	{
 		// Setup
+		String str1,
+			   str2;
+
+		// Test & Verify
+		assert(str1 <= str2);
+	}
+
+	{
+		// Setup
 		String str1 = "a",
 			   str2 = "z";
 
@@ -22,7 +31,7 @@ int main ()
 	{
 		// Setup
 		String str1 = "az",
-			   str2 = "za";
+			   str2 = "zz";
 
 		// Test & Verify
 		assert(str1 < str2);

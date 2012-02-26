@@ -109,8 +109,8 @@ bool String::operator<(const String& rhs) const
 {
     bool lessThan = false;
     int i = 0;
-    while ( (s[i] != '\0') && (rhs.s[i] != '\0') ){
-        if (s[i] > rhs.s[i]) return false;
+    while ( (s[i] != '\0') && (rhs.s[i] != '\0') ) {
+		if (s[i] > rhs.s[i]) return false;
         if (s[i] < rhs.s[i]) lessThan = true;
         ++i;
     }
