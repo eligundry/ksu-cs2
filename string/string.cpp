@@ -50,10 +50,12 @@ String::String(const char ch[])
  * Destroys the dynamic string object
  * Ex: none; 
  */
-String::~String()
-{
-	delete s;
-} 
+/*
+ * String::~String()
+ * {
+ * 	delete s;
+ * }  
+ */
 
 /*
  * Assignment operator for strings
@@ -95,25 +97,6 @@ bool String::operator==(const String& rhs) const
 	return false;
 }
 
-bool String::operator!=(const String& rhs) const
-{
-	return !(*this == rhs);
-}
-
-/*
- * Returns the character from the specified spot in the string
- * Ex: str[3]; 
- */
-char String::operator[](const int spot) const
-{
-	return s[spot];
-}
-
-char& String::operator[](const int spot)
-{
-	return s[spot];
-}
-
 /*
  * Compares the length of the strings and returns bool
  * Ex: str < str2; 
@@ -137,21 +120,6 @@ bool String::operator<(const String& rhs) const
     if (!lessThan && (s[i] == '\0') && (rhs.s[i] == '\0')) return false;
     if (s[i] == '\0') return true;
     return false;
-}
-
-bool String::operator<=(const String& rhs) const
-{
-	return (*this < rhs) || (*this == rhs);
-}
-
-bool String::operator>(const String& rhs) const
-{
-	return rhs < *this;
-}
-
-bool String::operator>=(const String& rhs) const
-{
-	return (rhs < *this) || (rhs == *this);
 }
 
 /*
@@ -184,17 +152,9 @@ String String::operator+(const char rhs[])
 }
 
 /*
- * Adds string to current string
- * Ex: str1 += str2; 
- */
-String String::operator+=(const String& rhs)
-{
-	return *this = *this + rhs;
-}
-
-/*
  * Subtracts x number of chars from string
  * Ex: str - 5; 
+ * Ex: str -= "this";
  */
 String String::operator-(const int x)
 {
@@ -215,11 +175,6 @@ String String::operator-(const int x)
 	}
 }
 
-String String::operator-=(const int x)
-{
-	return *this = *this - x;
-}
-
 /*
  * Subtracts a specified char from string
  * Ex: str - '\n'; 
@@ -236,11 +191,6 @@ String String::operator-(const char ch)
 	}
 
 	return result;
-}
-
-String String::operator-=(const char ch)
-{
-	return *this = *this - ch;
 }
 
 /*
@@ -268,11 +218,6 @@ String String::operator-(const String& str)
 	return result;
 }
 
-String String::operator-=(const String& str)
-{
-	return *this = *this - str;
-}
-
 /*
  * Multiples the contents of a string by integer
  * Ex: str1 = str2 * 5; 
@@ -292,15 +237,6 @@ String String::operator*(const int x)
 
 		return result;
 	}
-}
-
-/*
- * Multiples the contents of the string and appends it to that string
- * Ex: str1 *= 5; 
- */
-String String::operator*=(const int x)
-{
-	return *this = *this * x;
 }
 
 /*
@@ -433,11 +369,6 @@ String String::zip(const String& rhs) const
  * Ex: str.strip_nl(); 
  * Ex: str.strip_nl(". ");
  */
-String String::strip_nl()
-{
-	return *this - '\n';
-}
-
 String String::strip_nl(const String& replacement)
 {
 	String result;
@@ -459,11 +390,6 @@ String String::strip_nl(const String& replacement)
  * Ex: str1.repeat(5);
  * Ex: str1.repeat(5, "\n"); 
  */
-String String::repeat(const int x)
-{
-	return *this * x;
-}
-
 String String::repeat(const int x, const String& seperator)
 {
 	String result;

@@ -37,10 +37,11 @@ public:
 	 * Destroys the dynamic string object
 	 * Ex: none; 
 	 */
-	~String();
+	// ~String();
 
 	/*
 	 * Assignment operator for strings
+	 * Ex: string str = 'a'; 
 	 * Ex: string str = "It's over 9000!"; 
 	 */
 	String operator=(const char);
@@ -52,26 +53,26 @@ public:
 	 * Ex: str != str2; 
 	 */
 	bool operator==(const String&) const;
-	bool operator!=(const String&) const;
+	bool operator!=(const String& rhs) const { return !(*this == rhs); };
 
 	/*
 	 * Returns the character from the specified spot in the string
 	 * Ex: str[3]; 
 	 */
-	char operator[](const int) const;
-	char& operator[](const int);
+	char operator[](const int spot) const { return s[spot]; };
+	char& operator[](const int spot) { return s[spot]; };
 
 	/*
-	 * Compares the length of the strings and returns bool
+	 * Compares the values of the strings and returns bool
 	 * Ex: str < str2; 
 	 * Ex: str <= str2; 
 	 * Ex: str > str2;
 	 * Ex: str >= str2;
 	 */
 	bool operator<(const String&) const; 
-	bool operator<=(const String&) const; 
-	bool operator>(const String&) const; 
-	bool operator>=(const String&) const; 
+	bool operator<=(const String& rhs) const { return (*this < rhs) || (*this == rhs); }; 
+	bool operator>(const String& rhs) const { return rhs < *this; }; 
+	bool operator>=(const String& rhs) const { return rhs <= *this; }; 
 
 	/*
 	 * Adds two strings together
@@ -84,28 +85,29 @@ public:
 	 * Adds string to current string
 	 * Ex: str1 += str2; 
 	 */
-	String operator+=(const String&);
+	String operator+=(const String& rhs) { return *this = *this + rhs; };
 
 	/*
 	 * Subtracts x number of chars from string
 	 * Ex: str - 5; 
 	 */
 	String operator-(const int);
-	String operator-=(const int);
+	String operator-=(const int x) { return *this = *this - x; };
 
 	/*
 	 * Subtracts a specified char from string
 	 * Ex: str - '\n'; 
 	 */
 	String operator-(const char);
-	String operator-=(const char);
+	String operator-=(const char ch) { return *this = *this - ch; };
 
 	/*
 	 * Subtracts specified string from string
 	 * Ex: str - "this"; 
+	 * Ex: str -= "this";
 	 */
 	String operator-(const String&);
-	String operator-=(const String&);
+	String operator-=(const String& str) { return *this = *this - str; };
 
 	/*
 	 * Multiples the contents of a string by integer
@@ -117,7 +119,7 @@ public:
 	 * Multiples the contents of the string and appends it to that string
 	 * Ex: str1 *= 5; 
 	 */
-	String operator*=(const int);
+	String operator*=(const int x) { return *this = *this * x; };
 	
 	/*
 	 * Outputs string with << operator
@@ -167,7 +169,7 @@ public:
 	 * Ex: str.strip_nl(); 
 	 * Ex: str.strip_nl(". ");
 	 */
-	String strip_nl();
+	String strip_nl() { return *this - '\n'; };
 	String strip_nl(const String&);
 
 	/*
@@ -175,7 +177,7 @@ public:
 	 * Ex: str1.repeat(5);
 	 * Ex: str1.repeat(5, "\n"); 
 	 */
-	String repeat(const int);
+	String repeat(const int x) { return *this * x; };
 	String repeat(const int, const String&);
 
 	/*
