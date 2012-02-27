@@ -57,17 +57,6 @@ String::String(const char ch[])
 }
 
 /*
- * Destroys the dynamic string object
- * Ex: none; 
- */
-/*
- * String::~String()
- * {
- * 	delete s;
- * }  
- */
-
-/*
  * Assignment operator for strings
  * Ex: string str = 'a'; 
  * Ex: string str = "It's over 9000!"; 

@@ -43,7 +43,7 @@ public:
 	 * Destroys the dynamic string object
 	 * Ex: none; 
 	 */
-	// ~String();
+	~String() {};
 
 	/*
 	 * Assignment operator for strings
