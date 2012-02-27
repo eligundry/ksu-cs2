@@ -239,26 +239,6 @@ String String::operator*(const int x)
 }
 
 /*
- * Outputs string with << operator
- * Ex: std::cout << str1;  
- */
-std::ostream& operator<<(std::ostream& out, const String& str)
-{
-	out << str.s;
-	return out;
-}
-
-/*
- * Inputs string from keyboard with >> operator
- * Ex: std::cin >> str1; 
- */
-std::istream& operator>>(std::istream& in, const String& str)
-{
-	in >> str.s;
-	return in;
-}
-
-/*
  * Returns the length of the string
  * Ex: str.length(); 
  */
@@ -434,4 +414,24 @@ String String::substr(const int start, const int end)
 
 		return result;
 	}
+}
+
+/*
+ * Outputs string with << operator
+ * Ex: std::cout << str1;  
+ */
+std::ostream& operator<<(std::ostream& out, const String& str)
+{
+	out << str.s;
+	return out;
+}
+
+/*
+ * Inputs string from keyboard with >> operator
+ * Ex: std::cin >> str1; 
+ */
+std::istream& operator>>(std::istream& in, const String& str)
+{
+	in >> str.s;
+	return in;
 }

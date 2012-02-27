@@ -128,18 +128,6 @@ public:
 	String operator*=(const int x) { return *this = *this * x; };
 	
 	/*
-	 * Outputs string with << operator
-	 * Ex: std::cout << str1;  
-	 */
-	friend std::ostream& operator<<(std::ostream&, const String&);
-
-	/*
-	 * Inputs string from keyboard with >> operator
-	 * Ex: std::cin >> str1; 
-	 */
-	friend std::istream& operator>>(std::istream&, const String&);
-
-	/*
 	 * Returns the length of the string
 	 * Ex: str.length(); 
 	 */
@@ -193,6 +181,18 @@ public:
 	 */
 	String substr(const int) const;
 	String substr(const int, const int);
+
+	/*
+	 * Outputs string with << operator
+	 * Ex: std::cout << str1;  
+	 */
+	friend std::ostream& operator<<(std::ostream&, const String&);
+
+	/*
+	 * Inputs string from keyboard with >> operator
+	 * Ex: std::cin >> str1; 
+	 */
+	friend std::istream& operator>>(std::istream&, const String&);
 
 private:
 	char *s;
