@@ -18,6 +18,16 @@ String::String()
 }
 
 /*
+ * Initalizes string to a specified size
+ * Ex: String str(50); 
+ */
+String::String(const int size)
+{
+	s = new char[size];
+	s[0] = '\0';
+}
+
+/*
  * Initalizes string to a single char passed to it
  * Ex: string str('a'); 
  */

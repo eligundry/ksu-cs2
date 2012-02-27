@@ -22,6 +22,12 @@ public:
 	String();
 
 	/*
+	 * Initalizes string to a specified size
+	 * Ex: String str(50); 
+	 */
+	String(const int);
+
+	/*
 	 * Initalizes string to a single char passed to it
 	 * Ex: string str('a'); 
 	 */

@@ -30,4 +30,13 @@ int main ()
         // VERIFY
         assert(str == "");
     }
+
+	{
+		// Setup
+		String str(50);
+
+		// Verify
+		assert(str == "");
+		assert(str == '\0');
+	}
 }
