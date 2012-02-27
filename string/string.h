@@ -43,6 +43,7 @@ public:
 	 * Assignment operator for strings
 	 * Ex: string str = "It's over 9000!"; 
 	 */
+	String operator=(const char);
 	String operator=(const char[]);
 
 	/*

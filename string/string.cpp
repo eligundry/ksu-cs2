@@ -53,12 +53,19 @@ String::String(const char ch[])
 String::~String()
 {
 	delete s;
-}
+} 
 
 /*
  * Assignment operator for strings
+ * Ex: string str = 'a'; 
  * Ex: string str = "It's over 9000!"; 
  */
+String String::operator=(const char ch)
+{
+	String str(ch);
+	return *this = str;
+} 
+
 String String::operator=(const char ch[])
 {
 	String str(ch);
