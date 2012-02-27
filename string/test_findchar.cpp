@@ -15,8 +15,7 @@ int main ()
 
 		// Test & Verify
 		assert(str1 == "");
-		assert(str1.findchar('a') == 0);
-		assert(str1.findchar('\0') == 0);
+		assert(str1.findchar('a') == -1);
 	}
 
 	{
@@ -25,8 +24,18 @@ int main ()
 
 		// Test & Verify
 		assert(str1 == "This is a test");
-		assert(str1.findchar('t') == 2);
-		assert(str1.findchar('T') == 1);
-		assert(str1.findchar('z') == 0);
+		assert(str1.findchar('t') == 10);
+		assert(str1.findchar('T') == 0);
+		assert(str1.findchar('z') == -1);
+	}
+
+	{
+		// Setup
+		String str1 = "It's over 9000!";
+
+		// Test & Verify
+		assert(str1 == "It's over 9000!");
+		assert(str1.findchar('o', 3) == 2);
+		assert(str1.findchar('z', 3) == -1);
 	}
 }

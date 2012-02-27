@@ -47,6 +47,15 @@ String::String(const char ch[])
 }
 
 /*
+ * Destroys the dynamic string object
+ * Ex: none; 
+ */
+String::~String()
+{
+	delete s;
+}
+
+/*
  * Assignment operator for strings
  * Ex: string str = "It's over 9000!"; 
  */
@@ -109,11 +118,13 @@ bool String::operator<(const String& rhs) const
 {
     bool lessThan = false;
     int i = 0;
+
     while ( (s[i] != '\0') && (rhs.s[i] != '\0') ) {
 		if (s[i] > rhs.s[i]) return false;
         if (s[i] < rhs.s[i]) lessThan = true;
         ++i;
     }
+
     if (lessThan && (s[i] == '\0') && (rhs.s[i] == '\0')) return true;
     if (lessThan && (rhs.s[i] == '\0')) return true;
     if (!lessThan && (s[i] == '\0') && (rhs.s[i] == '\0')) return false;
@@ -268,7 +279,7 @@ String String::operator*(const int x)
 	} else {
 		String result;
 
-		for (int i = 1; i <= x; i++) {
+		for (int i = 1; i <= x; ++i) {
 			result += *this;
 		}
 
@@ -322,20 +333,27 @@ int String::length() const
 
 /*
  * Returns the number of occurrences of a char in a string
- * Ex: str1.findchar(); 
+ * Ex: str1.findchar('a'); 
+ * Ex: str1.findchar('a', 3); 
  */
 int String::findchar(const char ch) const
 {
-	int times = 0,
+	int first_index = -1,
 		this_length = length();
 
 	for (int i = 0; i < this_length; ++i) {
 		if (s[i] == ch) {
-			++times;
+			return first_index = i;
 		}
 	}
 
-	return times;
+	return first_index;
+}
+
+int String::findchar(const char ch, const int start) const
+{
+	String temp = substr(start);
+	return temp.findchar(ch);
 }
 
 /*
@@ -348,13 +366,15 @@ int String::findstr(const String& find) const
 		this_length = length(),
 		find_length = find.length();
 
-	for (int i = 0, j = 0; i < this_length; ++i, j = 0) {
-		while (s[i + j] == find.s[j] && j <= find_length) {
-			++j;
+	if (!(this_length < find_length)) {
+		for (int i = 0, j = 0; i < this_length; ++i, j = 0) {
+			while (s[i + j] == find.s[j] && j <= find_length) {
+				++j;
 
-			if (j == find_length) {
-				++times;
-				i = i + j;
+				if (j == find_length) {
+					++times;
+					i = i + j;
+				}
 			}
 		}
 	}

@@ -34,6 +34,12 @@ public:
 	String(const char[]);
 
 	/*
+	 * Destroys the dynamic string object
+	 * Ex: none; 
+	 */
+	~String();
+
+	/*
 	 * Assignment operator for strings
 	 * Ex: string str = "It's over 9000!"; 
 	 */
@@ -135,6 +141,7 @@ public:
 	 * Ex: str1.findchar(); 
 	 */
 	int findchar(const char) const;
+	int findchar(const char, const int) const;
 
 	/*
 	 * Returns the number of occurances of a string inside of a string
