@@ -68,7 +68,6 @@ public:
 	 * Ex: String str = 'a'; 
 	 * Ex: String str = "It's over 9000!"; 
 	 */
-	String operator=(const char[]);
 	String operator=(const String&);
 
 	/*
@@ -77,7 +76,6 @@ public:
 	 * Ex: str != str2; 
 	 */
 	bool operator==(const String&) const;
-	bool operator==(const char[]) const;
 	bool operator!=(const String& rhs) const { return !(*this == rhs); };
 
 	/*
@@ -105,7 +103,6 @@ public:
 	 * Ex: str1 += str2; 
 	 */
 	String operator+(const String&);
-	String operator+(const char[]);
 	String operator+=(const String& rhs) { return *this = *this + rhs; };
 
 	/*

@@ -56,9 +56,8 @@ String::String(const char ch[])
 	do {
 		int i = 0;
 
-		while (ch[i] != '\0') {
+		for (i = 0; ch[i] != '\0'; ++i) {
 			s[i] = ch[i];
-			++i;
 		}
 		
 		strLength = i;
@@ -87,9 +86,8 @@ String::String(const char ch[], const int size)
 	do {
 		int i = 0;
 		
-		while (ch[i] != '\0') {
+		for (i = 0; ch[i] != '\0'; ++i) {
 			s[i] = ch[i];
-			++i;
 		}
 		
 		strLength = i;
@@ -119,9 +117,8 @@ String::String(const String& str)
 	do {
 		int i = 0;
 		
-		while (str.s[i] != '\0') {
-			s[i] = str.s[i];
-			++i;
+		for (i = 0; str[i] != '\0'; ++i) {
+			s[i] = str[i];
 		}
 		
 		strLength = i;
@@ -151,9 +148,8 @@ String::String(const String& str, const int cap)
 	do {
 		int i = 0;
 		
-		while (str.s[i] != '\0') {
-			s[i] = str.s[i];
-			++i;
+		for (i = 0; str[i] != '\0'; ++i) {
+			s[i] = str[i];
 		}
 		
 		strLength = i;
@@ -172,7 +168,7 @@ String::String(const String& str, const int cap)
 
 /*
  * Destroys the dynamic string object
- * Ex: none; 
+ * Ex: delete [] s; 
  */
 String::~String()
 {
@@ -185,27 +181,18 @@ String::~String()
  * Ex: string str = 'a'; 
  * Ex: string str = "It's over 9000!"; 
  */
-String String::operator=(const char rhs[])
-{
-	String str(rhs);
-	return *this = str;
-} 
-
 String String::operator=(const String& rhs)
 {
-	int i = 0;
-	
 	delete [] s;
 	capacity = rhs.capacity;
 	s = new char[capacity];
 	strLength = rhs.length();
 	
-	while (rhs[i] != '\0') {
+	for (int i = 0; rhs[i] != '\0'; ++i) {
 		s[i] = rhs[i];
-		++i;
 	}
 	
-	s[i] = '\0';
+	s[strLength] = '\0';
 	
 	return *this;
 }
@@ -218,25 +205,17 @@ String String::operator=(const String& rhs)
 bool String::operator==(const String& rhs) const 
 {
 	if (length() == rhs.length()) {
-		int i = 0;
 		
-		while (s[i] != '\0' && rhs[i] != '\0') {
+		for (int i = 0; s[i] != '\0' && rhs[i] != '\0'; ++i) {
 			if (s[i] != rhs[i]) {
 				return false;
 			}
-			++i;
 		}
 
 		return true;
 	}
 
 	return false;
-}
-
-bool String::operator==(const char ch[]) const
-{
-	String str_ch(ch);
-	return *this == str_ch;
 }
 
 /*
@@ -271,30 +250,20 @@ bool String::operator<(const String& rhs) const
 String String::operator+(const String& rhs)
 {
 	String result(length() + rhs.length() + 1);
-	int i = 0,
-		j = 0;
+	int i = 0;
 	
-	while (s[i] != '\0') {
+	for (i = 0; s[i] != '\0'; ++i) {
 		result[i] = s[i];
-		++i;
 	}
 
-	while (rhs[j] != '\0') {
+	for (int j = 0; rhs[j] != '\0'; ++i, ++j) {
 		result[i] = rhs[j];
-		++i;
-		++j;
 	}
 
 	result.strLength = i;
 	result[i] = '\0';
 	return result;
 } 
-
-String String::operator+(const char rhs[])
-{
-	String str_rhs(rhs);
-	return *this + str_rhs;
-}
 
 /*
  * Subtracts x number of chars from string
@@ -309,9 +278,8 @@ String String::operator-(const int x)
 		return "";
 	} else {
 		String result(length() - (x + 1));
-		int i = 0;
 
-		for (i = 0; i < (length() - x); ++i) {
+		for (int i = 0; i < (length() - x); ++i) {
 			result += s[i];
 		}
 
@@ -463,9 +431,8 @@ String String::reallocate(const int size)
 	capacity = temp.capacity;
 	s = new char[capacity];
 	
-	while (temp[i] != '\0') {
+	for (i = 0; temp[i] != '\0'; ++i) {
 		s[i] = temp[i];
-		++i;
 	}
 	
 	strLength = i;
@@ -539,11 +506,10 @@ String String::strip_nl(const String& replacement)
 	String result;
 
 	for (int i = 0; i < length(); ++i) {
-		if (s[i] != '\n') {
+		if (s[i] != '\n')
 			result += s[i];
-		} else {
+		else
 			result += replacement;
-		}
 	}
 
 	return result;
