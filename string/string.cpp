@@ -501,6 +501,30 @@ String String::reverse() const
 }
 
 /*
+ * Splits a string on a char and returns it as a vector
+ * Ex: str.split(' '); 
+ */
+vector<String> String::split(const char ch)
+{
+	vector<String> result;
+	int i = 0;
+
+	while (i < length()) {
+
+		String temp;
+
+		while(s[i] != ch && s[i] != '\0') {
+			temp += s[i];
+			++i;
+		}
+		
+		result.push_back(temp);
+	}
+	
+	return result;
+}
+
+/*
  * Strips newlines from strings
  * Ex: str.strip_nl(); 
  * Ex: str.strip_nl(". ");

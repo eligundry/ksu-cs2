@@ -1,7 +1,7 @@
 /*
  * Author      : Eli Gundry
  * Date        : 02/15/2012
- * Name        : string
+ * Name        : String
  * Description : My own implementation of the string datatype's header file
  */
 
@@ -9,6 +9,9 @@
 #define CS33001_STRING_H
 
 #include <iostream>
+#include <vector>
+
+using std::vector;
 
 #define default_size 128
 
@@ -17,7 +20,7 @@ class String
 public:
 	/*
 	 * Initalizes string to '\0'
-	 * Ex: string str; 
+	 * Ex: String str; 
 	 */
 	String();
 
@@ -29,13 +32,13 @@ public:
 
 	/*
 	 * Initalizes string to a single char passed to it
-	 * Ex: string str('a'); 
+	 * Ex: String str('a'); 
 	 */
 	String(const char);
 
 	/*
 	 * Initalizes string to a character array passed to it
-	 * Ex: string str("It's over 9000!"); 
+	 * Ex: String str("It's over 9000!"); 
 	 */
 	String(const char[]);
 	
@@ -56,14 +59,14 @@ public:
 
 	/*
 	 * Destroys the dynamic string object
-	 * Ex: none; 
+	 * Ex: delete [] s; 
 	 */
 	~String();
 
 	/*
 	 * Assignment operator for strings
-	 * Ex: string str = 'a'; 
-	 * Ex: string str = "It's over 9000!"; 
+	 * Ex: String str = 'a'; 
+	 * Ex: String str = "It's over 9000!"; 
 	 */
 	String operator=(const char[]);
 	String operator=(const String&);
@@ -191,6 +194,12 @@ public:
 	 * Ex: str.reverse(); 
 	 */
 	String reverse() const;
+	
+	/*
+	 * Splits a string on a char and returns it as a vector
+	 * Ex: str.split(' '); 
+	 */
+	vector<String> split(const char);
 	
 	/*
 	 * Strips newlines from strings with optional replacement string
