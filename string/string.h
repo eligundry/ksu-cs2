@@ -149,12 +149,6 @@ public:
 
 	/*
 	 * Returns the length of the string
-	 * Ex: str.length(); 
-	 */
-	int length() const { return strLength; };
-	
-	/*
-	 * Returns the length of the string
 	 * Ex: str.buffCapacity(); 
 	 */
 	int buffCapacity() const { return capacity; };
@@ -173,24 +167,10 @@ public:
 	int findstr(const String&) const;
 
 	/*
-	 * Reverses the content of a string
-	 * Ex: str.reverse(); 
+	 * Returns the length of the string
+	 * Ex: str.length(); 
 	 */
-	String reverse() const;
-	
-	/*
-	 * Zips two strings together, like a zipper
-	 * Ex: str1.zip(str2) 
-	 */
-	String zip(const String&) const;
-
-	/*
-	 * Strips newlines from strings with optional replacement string
-	 * Ex: str.strip_nl(); 
-	 * Ex: str.strip_nl(". ");
-	 */
-	String strip_nl() { return *this - '\n'; };
-	String strip_nl(const String&);
+	int length() const { return strLength; };
 	
 	/*
 	 * Increases the capacity of a string and copies it
@@ -207,12 +187,32 @@ public:
 	String repeat(const int, const String&);
 
 	/*
+	 * Reverses the content of a string
+	 * Ex: str.reverse(); 
+	 */
+	String reverse() const;
+	
+	/*
+	 * Strips newlines from strings with optional replacement string
+	 * Ex: str.strip_nl(); 
+	 * Ex: str.strip_nl(". ");
+	 */
+	String strip_nl() { return *this - '\n'; };
+	String strip_nl(const String&);
+	
+	/*
 	 * Returns extracted part of a string
 	 * Ex: str1.substr(1);
 	 * Ex: str1.substr(1, 3); 
 	 */
 	String substr(const int) const;
 	String substr(const int, const int);
+
+	/*
+	 * Zips two strings together, like a zipper
+	 * Ex: str1.zip(str2) 
+	 */
+	String zip(const String&) const;
 
 private:
 	char *s;

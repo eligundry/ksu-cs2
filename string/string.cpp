@@ -444,64 +444,6 @@ int String::findstr(const String& find) const
 }
 
 /*
- * Reverses the content of a string
- * Ex: str.reverse(); 
- */
-String String::reverse() const
-{
-	String result(length() + 1);
-	result.strLength = length();
-
-	for (int i = result.strLength; i >= 0; --i) {
-		result += s[i];
-	}
-
-	return result;
-}
-
-/*
- * Zips two strings together, like a zipper
- * Ex: str1.zip(str2) 
- */
-String String::zip(const String& rhs) const
-{
-	String result(length() + rhs.length() + 1);
-	int i = 0;
-
-	do {
-		if (i <= length())
-			result += s[i]; 
-
-		if (i <= rhs.length())
-			result += rhs.s[i];
-
-		++i;
-	} while (i <= (length() + rhs.length()));
-
-	return result;
-}
-
-/*
- * Strips newlines from strings
- * Ex: str.strip_nl(); 
- * Ex: str.strip_nl(". ");
- */
-String String::strip_nl(const String& replacement)
-{
-	String result;
-
-	for (int i = 0; i < length(); ++i) {
-		if (s[i] != '\n') {
-			result += s[i];
-		} else {
-			result += replacement;
-		}
-	}
-
-	return result;
-}
-
-/*
  * Increases the capacity of a string and copies it
  * Ex: str.reallocate(50); 
  */
@@ -543,6 +485,42 @@ String String::repeat(const int x, const String& seperator)
 }
 
 /*
+ * Reverses the content of a string
+ * Ex: str.reverse(); 
+ */
+String String::reverse() const
+{
+	String result(length() + 1);
+	result.strLength = length();
+
+	for (int i = result.strLength; i >= 0; --i) {
+		result += s[i];
+	}
+
+	return result;
+}
+
+/*
+ * Strips newlines from strings
+ * Ex: str.strip_nl(); 
+ * Ex: str.strip_nl(". ");
+ */
+String String::strip_nl(const String& replacement)
+{
+	String result;
+
+	for (int i = 0; i < length(); ++i) {
+		if (s[i] != '\n') {
+			result += s[i];
+		} else {
+			result += replacement;
+		}
+	}
+
+	return result;
+}
+
+/*
  * Returns extracted part of a string
  * Ex: str1.substr(1);
  * Ex: str1.substr(1, 3); 
@@ -552,9 +530,10 @@ String String::substr(const int start) const
 	if (start == 0) {
 		return *this;
 	} else {
-		String result;
+		String result(length() + 1);
+		result.strLength = 0;
 
-		for (int i = start; i < length(); ++i) {
+		for (int i = start; i < length(); ++i, ++result.strLength) {
 			result += s[i];
 		}
 
@@ -567,7 +546,7 @@ String String::substr(const int start, const int end)
 	if (start == 0) {
 		return *this - (length() - end);
 	} else {
-		String result;
+		String result(length() + 1);
 
 		for (int i = start; i < end; ++i) {
 			result += s[i];
@@ -575,4 +554,26 @@ String String::substr(const int start, const int end)
 
 		return result;
 	}
+}
+
+/*
+ * Zips two strings together, like a zipper
+ * Ex: str1.zip(str2) 
+ */
+String String::zip(const String& rhs) const
+{
+	String result(length() + rhs.length() + 1);
+	int i = 0;
+
+	do {
+		if (i <= length())
+			result += s[i]; 
+
+		if (i <= rhs.length())
+			result += rhs[i];
+
+		++i;
+	} while (i <= result.capacity - 1);
+
+	return result;
 }
