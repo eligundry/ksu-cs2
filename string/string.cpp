@@ -13,8 +13,8 @@
  */
 String::String()
 {
-	s = new char[default_size]; 
 	capacity = default_size;
+	s = new char[capacity]; 
 	strLength = 0;
 	s[0] = '\0';
 }
@@ -37,8 +37,8 @@ String::String(const int size)
  */
 String::String(const char ch)
 {
-	s = new char[default_size];
-	capacity = default_size;
+	capacity = 2;
+	s = new char[capacity];
 	strLength = 1;
 	s[0] = ch;
 	s[1] = '\0';
@@ -54,8 +54,6 @@ String::String(const char ch[])
 	s = new char[capacity];
 	
 	do {
-		s = new char[capacity];
-
 		int i = 0;
 
 		while (ch[i] != '\0') {
@@ -68,6 +66,7 @@ String::String(const char ch[])
 		if (capacity < strLength) {
 			delete [] s;
 			capacity *= 2;
+			s = new char[capacity];
 			strLength = capacity;
 		}
 		
@@ -86,8 +85,6 @@ String::String(const char ch[], const int size)
 	s = new char[capacity];
 	
 	do {
-		s = new char[capacity];
-		
 		int i = 0;
 		
 		while (ch[i] != '\0') {
@@ -100,6 +97,7 @@ String::String(const char ch[], const int size)
 		if (capacity < strLength) {
 			delete [] s;
 			capacity *= 2;
+			s = new char[capacity];
 			strLength = capacity;
 		}
 		
@@ -115,10 +113,10 @@ String::String(const char ch[], const int size)
  */
 String::String(const String& str)
 {
-	capacity = default_size;
-	
+	capacity = str.length() + 1;
+	s = new char[capacity];
+
 	do {
-		s = new char[capacity];
 		int i = 0;
 		
 		while (str.s[i] != '\0') {
@@ -131,8 +129,10 @@ String::String(const String& str)
 		if (capacity < strLength) {
 			delete [] s;
 			capacity *= 2;
+			s = new char[capacity];
 			strLength = capacity;
 		}
+		
 	} while (capacity < strLength);
 	
 	s[strLength] = '\0';
@@ -140,10 +140,15 @@ String::String(const String& str)
 
 String::String(const String& str, const int cap)
 {
-	capacity = cap;
+	if (cap <= str.length()) {
+		capacity = str.length() + 1;
+	} else {
+		capacity = cap;
+	}
+	
+	s = new char[capacity];
 
 	do {
-		s = new char[capacity];
 		int i = 0;
 		
 		while (str.s[i] != '\0') {
@@ -156,8 +161,10 @@ String::String(const String& str, const int cap)
 		if (capacity < strLength) {
 			delete [] s;
 			capacity *= 2;
+			s = new char[capacity];
 			strLength = capacity;
 		}
+
 	} while (capacity < strLength);
 	
 	s[strLength] = '\0';
@@ -187,14 +194,14 @@ String String::operator=(const char rhs[])
 String String::operator=(const String& rhs)
 {
 	int i = 0;
+	
 	delete [] s;
-
 	capacity = rhs.capacity;
 	s = new char[capacity];
 	strLength = rhs.length();
 	
-	while (rhs.s[i] != '\0') {
-		s[i] = rhs.s[i];
+	while (rhs[i] != '\0') {
+		s[i] = rhs[i];
 		++i;
 	}
 	
@@ -213,8 +220,8 @@ bool String::operator==(const String& rhs) const
 	if (length() == rhs.length()) {
 		int i = 0;
 		
-		while (s[i] != '\0' && rhs.s[i] != '\0') {
-			if (s[i] != rhs.s[i]) {
+		while (s[i] != '\0' && rhs[i] != '\0') {
+			if (s[i] != rhs[i]) {
 				return false;
 			}
 			++i;
@@ -244,15 +251,15 @@ bool String::operator<(const String& rhs) const
     bool lessThan = false;
     int i = 0;
 
-    while ( (s[i] != '\0') && (rhs.s[i] != '\0') ) {
-		if (s[i] > rhs.s[i]) return false;
-        if (s[i] < rhs.s[i]) lessThan = true;
+    while ( (s[i] != '\0') && (rhs[i] != '\0') ) {
+		if (s[i] > rhs[i]) return false;
+        if (s[i] < rhs[i]) lessThan = true;
         ++i;
     }
 
-    if (lessThan && (s[i] == '\0') && (rhs.s[i] == '\0')) return true;
-    if (lessThan && (rhs.s[i] == '\0')) return true;
-    if (!lessThan && (s[i] == '\0') && (rhs.s[i] == '\0')) return false;
+    if (lessThan && (s[i] == '\0') && (rhs[i] == '\0')) return true;
+    if (lessThan && (rhs[i] == '\0')) return true;
+    if (!lessThan && (s[i] == '\0') && (rhs[i] == '\0')) return false;
     if (s[i] == '\0') return true;
     return false;
 }
@@ -268,20 +275,18 @@ String String::operator+(const String& rhs)
 		j = 0;
 	
 	while (s[i] != '\0') {
-		result.s[i] = s[i];
+		result[i] = s[i];
 		++i;
 	}
 
-	while (rhs.s[j] != '\0') {
-		result.s[i] = rhs.s[j];
+	while (rhs[j] != '\0') {
+		result[i] = rhs[j];
 		++i;
 		++j;
 	}
 
 	result.strLength = i;
-	
-	result.s[i] = '\0';
-	
+	result[i] = '\0';
 	return result;
 } 
 
@@ -303,9 +308,10 @@ String String::operator-(const int x)
 	} else if (x >= length()) {
 		return "";
 	} else {
-		String result;
+		String result(length() - (x + 1));
+		int i = 0;
 
-		for (int i = 0; i < (length() - x); ++i) {
+		for (i = 0; i < (length() - x); ++i) {
 			result += s[i];
 		}
 
@@ -319,7 +325,7 @@ String String::operator-(const int x)
  */
 String String::operator-(const char ch)
 {
-	String result;
+	String result(length() + 1);
 
 	for (int i = 0; i < length(); ++i) {
 		if (s[i] != ch) {
@@ -336,7 +342,7 @@ String String::operator-(const char ch)
  */
 String String::operator-(const String& rhs)
 {
-	String result;
+	String result(length() + 1);
 	int i = 0;
 
 	for (int j = 0; i < length(); ++i, j = 0) {
@@ -365,7 +371,7 @@ String String::operator*(const int x)
 	} else if (x == 1) {
 		return *this;
 	} else {
-		String result;
+		String result((length() * x) + 1);
 
 		for (int i = 1; i <= x; ++i) {
 			result += *this;
@@ -449,21 +455,21 @@ int String::findstr(const String& find) const
  */
 String String::reallocate(const int size)
 {
-	String result(*this, size);
+	String temp(*this, size);
 	
 	delete [] s;
 	
 	int i = 0;
-	capacity = result.capacity;
+	capacity = temp.capacity;
 	s = new char[capacity];
 	
-	while (result[i] != '\0') {
-		s[i] = result[i];
+	while (temp[i] != '\0') {
+		s[i] = temp[i];
 		++i;
 	}
 	
 	strLength = i;
-	s[i + 1] = '\0';
+	s[i] = '\0';
 	
 	return *this;
 }
@@ -475,7 +481,7 @@ String String::reallocate(const int size)
  */
 String String::repeat(const int x, const String& seperator)
 {
-	String result;
+	String result(((length() + seperator.length()) * x) + 1);
 
 	for (int i = 0; i < x; ++i) {
 		result += *this + seperator;
@@ -491,9 +497,8 @@ String String::repeat(const int x, const String& seperator)
 String String::reverse() const
 {
 	String result(length() + 1);
-	result.strLength = length();
 
-	for (int i = result.strLength; i >= 0; --i) {
+	for (int i = length(); i >= 0; --i) {
 		result += s[i];
 	}
 
@@ -555,9 +560,8 @@ String String::substr(const int start) const
 		return *this;
 	} else {
 		String result(length() + 1);
-		result.strLength = 0;
 
-		for (int i = start; i < length(); ++i, ++result.strLength) {
+		for (int i = start; i < length(); ++i) {
 			result += s[i];
 		}
 

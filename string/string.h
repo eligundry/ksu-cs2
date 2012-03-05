@@ -225,8 +225,7 @@ public:
 
 private:
 	char *s;
-	int capacity,
-		strLength;
+	int capacity, strLength;
 };
 
 #endif 
