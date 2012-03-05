@@ -46,14 +46,4 @@ int main ()
 		// Verify
 		assert(str1 == "This is a test.");
 	}
-
-	{
-		// Setup & Test
-		String str1 = "Yay!",
-			   str2 = str1;
-
-		// Verify
-		assert(str2 == "Yay!");
-		assert((str2 += str1) == "Yay!Yay!");
-	}
 }

@@ -14,6 +14,8 @@
 String::String()
 {
 	s = new char[default_size]; 
+	capacity = default_size;
+	strLength = 0;
 	s[0] = '\0';
 }
 
@@ -23,7 +25,9 @@ String::String()
  */
 String::String(const int size)
 {
-	s = new char[size];
+	capacity = size;
+	s = new char[capacity];
+	strLength = 0;
 	s[0] = '\0';
 }
 
@@ -33,7 +37,9 @@ String::String(const int size)
  */
 String::String(const char ch)
 {
-	s = new char[2];
+	s = new char[default_size];
+	capacity = default_size;
+	strLength = 1;
 	s[0] = ch;
 	s[1] = '\0';
 }
@@ -44,16 +50,127 @@ String::String(const char ch)
  */
 String::String(const char ch[])
 {
-	s = new char[default_size];
+	capacity = default_size;
+	s = new char[capacity];
+	
+	do {
+		s = new char[capacity];
 
-	int i = 0;
+		int i = 0;
 
-	while (ch[i] != '\0') {
-		s[i] = ch[i];
-		++i;
-	}
+		while (ch[i] != '\0') {
+			s[i] = ch[i];
+			++i;
+		}
+		
+		strLength = i;
+		
+		if (capacity < strLength) {
+			delete [] s;
+			capacity *= 2;
+			strLength = capacity;
+		}
+		
+	} while (capacity < strLength);
+	
+	s[strLength] = '\0';
+}
 
-	s[i] = '\0';
+/*
+ * Initalizes string to specified size with char array
+ * Ex: String str("It's over 9000!", 30); 
+ */
+String::String(const char ch[], const int size)
+{
+	capacity = size;
+	s = new char[capacity];
+	
+	do {
+		s = new char[capacity];
+		
+		int i = 0;
+		
+		while (ch[i] != '\0') {
+			s[i] = ch[i];
+			++i;
+		}
+		
+		strLength = i;
+		
+		if (capacity < strLength) {
+			delete [] s;
+			capacity *= 2;
+			strLength = capacity;
+		}
+		
+	} while (capacity < strLength);
+	
+	s[strLength] = '\0';
+}
+
+/*
+ * Copies one string to another, with optional capacity
+ * Ex: String new_str(old_str);
+ * Ex: String new_str(old_str, old_str.length() * 2); 
+ */
+String::String(const String& str)
+{
+	capacity = default_size;
+	
+	do {
+		s = new char[capacity];
+		int i = 0;
+		
+		while (str.s[i] != '\0') {
+			s[i] = str.s[i];
+			++i;
+		}
+		
+		strLength = i;
+		
+		if (capacity < strLength) {
+			delete [] s;
+			capacity *= 2;
+			strLength = capacity;
+		}
+	} while (capacity < strLength);
+	
+	s[strLength] = '\0';
+}
+
+String::String(const String& str, const int cap)
+{
+	capacity = cap;
+
+	do {
+		s = new char[capacity];
+		int i = 0;
+		
+		while (str.s[i] != '\0') {
+			s[i] = str.s[i];
+			++i;
+		}
+		
+		strLength = i;
+		
+		if (capacity < strLength) {
+			delete [] s;
+			capacity *= 2;
+			strLength = capacity;
+		}
+	} while (capacity < strLength);
+	
+	s[strLength] = '\0';
+}
+
+/*
+ * Destroys the dynamic string object
+ * Ex: none; 
+ */
+String::~String()
+{
+	strLength = 0;
+	delete [] s;
 }
 
 /*
@@ -61,17 +178,30 @@ String::String(const char ch[])
  * Ex: string str = 'a'; 
  * Ex: string str = "It's over 9000!"; 
  */
-String String::operator=(const char ch)
+String String::operator=(const char rhs[])
 {
-	String str(ch);
+	String str(rhs);
 	return *this = str;
 } 
 
-String String::operator=(const char ch[])
+String String::operator=(const String& rhs)
 {
-	String str(ch);
-	return *this = str;
-} 
+	int i = 0;
+	delete [] s;
+
+	capacity = rhs.capacity;
+	s = new char[capacity];
+	strLength = rhs.length();
+	
+	while (rhs.s[i] != '\0') {
+		s[i] = rhs.s[i];
+		++i;
+	}
+	
+	s[i] = '\0';
+	
+	return *this;
+}
 
 /*
  * Compares a string to another string
@@ -80,20 +210,26 @@ String String::operator=(const char ch[])
  */
 bool String::operator==(const String& rhs) const 
 {
-	int i = 0;
-
-	while (s[i] != '\0') {
-		if (s[i] != rhs.s[i]) {
-			return false;
+	if (length() == rhs.length()) {
+		int i = 0;
+		
+		while (s[i] != '\0' && rhs.s[i] != '\0') {
+			if (s[i] != rhs.s[i]) {
+				return false;
+			}
+			++i;
 		}
-		++i;
-	}
 
-	if (rhs.s[i] == '\0') {
 		return true;
 	}
 
 	return false;
+}
+
+bool String::operator==(const char ch[]) const
+{
+	String str_ch(ch);
+	return *this == str_ch;
 }
 
 /*
@@ -127,27 +263,32 @@ bool String::operator<(const String& rhs) const
  */
 String String::operator+(const String& rhs)
 {
-	String result;
-	int i,
-		lhs_length = length(),
-		rhs_length = rhs.length();
-
-	for (i = 0; i < lhs_length; ++i) {
+	String result(length() + rhs.length() + 1);
+	int i = 0,
+		j = 0;
+	
+	while (s[i] != '\0') {
 		result.s[i] = s[i];
+		++i;
 	}
 
-	for (int j = 0; i < lhs_length + rhs_length; ++j, ++i) {
+	while (rhs.s[j] != '\0') {
 		result.s[i] = rhs.s[j];
+		++i;
+		++j;
 	}
 
+	result.strLength = i;
+	
+	result.s[i] = '\0';
+	
 	return result;
 } 
 
 String String::operator+(const char rhs[])
 {
-	String str_rhs = rhs;
+	String str_rhs(rhs);
 	return *this + str_rhs;
-
 }
 
 /*
@@ -157,16 +298,14 @@ String String::operator+(const char rhs[])
  */
 String String::operator-(const int x)
 {
-	int this_length = length();
-
 	if (x <= 0) {
 		return *this;
-	} else if (x >= this_length) {
+	} else if (x >= length()) {
 		return "";
 	} else {
 		String result;
 
-		for (int i = 0; i < (this_length - x); ++i) {
+		for (int i = 0; i < (length() - x); ++i) {
 			result += s[i];
 		}
 
@@ -181,9 +320,8 @@ String String::operator-(const int x)
 String String::operator-(const char ch)
 {
 	String result;
-	int this_length = length();
 
-	for (int i = 0; i < this_length; ++i) {
+	for (int i = 0; i < length(); ++i) {
 		if (s[i] != ch) {
 			result += s[i];
 		}
@@ -196,17 +334,15 @@ String String::operator-(const char ch)
  * Subtracts specified string from string
  * Ex: str - "this"; 
  */
-String String::operator-(const String& str)
+String String::operator-(const String& rhs)
 {
 	String result;
-	int lhs_length = length(),
-		rhs_length = str.length();
 
-	for (int i = 0, j = 0; i < lhs_length; ++i, j = 0) {
-		while (s[i + j] == str.s[j] && j <= rhs_length) {
+	for (int i = 0, j = 0; i < length(); ++i, j = 0) {
+		while (s[i + j] == rhs.s[j] && j <= rhs.length()) {
 			++j;
 
-			if (j == rhs_length) {
+			if (j == rhs.length()) {
 				i = i + j;
 			}
 		}
@@ -239,18 +375,23 @@ String String::operator*(const int x)
 }
 
 /*
- * Returns the length of the string
- * Ex: str.length(); 
+ * Outputs string with << operator
+ * Ex: std::cout << str1;  
  */
-int String::length() const
+std::ostream& operator<<(std::ostream& out, const String& str)
 {
-	int i = 0;
+	out << str.s;
+	return out;
+}
 
-	while (s[i] != '\0') {
-		++i;
-	}
-
-	return i;
+/*
+ * Inputs string from keyboard with >> operator
+ * Ex: std::cin >> str1; 
+ */
+std::istream& operator>>(std::istream& in, const String& str)
+{
+	in >> str.s;
+	return in;
 }
 
 /*
@@ -260,10 +401,9 @@ int String::length() const
  */
 int String::findchar(const char ch) const
 {
-	int first_index = -1,
-		this_length = length();
+	int first_index = -1;
 
-	for (int i = 0; i < this_length; ++i) {
+	for (int i = 0; i < length(); ++i) {
 		if (s[i] == ch) {
 			return first_index = i;
 		}
@@ -284,16 +424,14 @@ int String::findchar(const char ch, const int start) const
  */
 int String::findstr(const String& find) const
 {
-	int times = 0,
-		this_length = length(),
-		find_length = find.length();
+	int times = 0;
 
-	if (!(this_length < find_length)) {
-		for (int i = 0, j = 0; i < this_length; ++i, j = 0) {
-			while (s[i + j] == find.s[j] && j <= find_length) {
+	if (length() >= find.length()) {
+		for (int i = 0, j = 0; i < length(); ++i, j = 0) {
+			while (s[i + j] == find.s[j] && j <= find.length()) {
 				++j;
 
-				if (j == find_length) {
+				if (j == find.length()) {
 					++times;
 					i = i + j;
 				}
@@ -310,9 +448,10 @@ int String::findstr(const String& find) const
  */
 String String::reverse() const
 {
-	String result;
+	String result(length() + 1);
+	result.strLength = length();
 
-	for (int i = length(); i >= 0; --i) {
+	for (int i = result.strLength; i >= 0; --i) {
 		result += s[i];
 	}
 
@@ -325,20 +464,18 @@ String String::reverse() const
  */
 String String::zip(const String& rhs) const
 {
-	String result;
-	int lhs_count = length() - 1,
-		rhs_count = rhs.length() - 1,
-		i = 0;
+	String result(length() + rhs.length() + 1);
+	int i = 0;
 
 	do {
-		if (i <= lhs_count)
+		if (i <= length())
 			result += s[i]; 
 
-		if (i <= rhs_count)
+		if (i <= rhs.length())
 			result += rhs.s[i];
 
 		++i;
-	} while (i <= (lhs_count + rhs_count));
+	} while (i <= (length() + rhs.length()));
 
 	return result;
 }
@@ -351,9 +488,8 @@ String String::zip(const String& rhs) const
 String String::strip_nl(const String& replacement)
 {
 	String result;
-	int this_length = length();
 
-	for (int i = 0; i < this_length; ++i) {
+	for (int i = 0; i < length(); ++i) {
 		if (s[i] != '\n') {
 			result += s[i];
 		} else {
@@ -391,9 +527,8 @@ String String::substr(const int start) const
 		return *this;
 	} else {
 		String result;
-		int this_length = length();
 
-		for (int i = start; i < this_length; ++i) {
+		for (int i = start; i < length(); ++i) {
 			result += s[i];
 		}
 
@@ -414,24 +549,4 @@ String String::substr(const int start, const int end)
 
 		return result;
 	}
-}
-
-/*
- * Outputs string with << operator
- * Ex: std::cout << str1;  
- */
-std::ostream& operator<<(std::ostream& out, const String& str)
-{
-	out << str.s;
-	return out;
-}
-
-/*
- * Inputs string from keyboard with >> operator
- * Ex: std::cin >> str1; 
- */
-std::istream& operator>>(std::istream& in, const String& str)
-{
-	in >> str.s;
-	return in;
 }

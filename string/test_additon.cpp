@@ -19,9 +19,9 @@ int main ()
 		result = str1 + str2;
 
 		// Verify
-		assert(str1 == '\0');
-		assert(str2 == '\0');
-		assert(result == '\0');
+		assert(str1 == "\0");
+		assert(str2 == "\0");
+		assert(result == "\0");
 	}
 
 	{
@@ -34,7 +34,7 @@ int main ()
 		result = str1 + str2;
 
 		// Verify
-		assert(str1 == '\0');
+		assert(str1 == "\0");
 		assert(str2 == "b");
 		assert(result == "b");
 	}

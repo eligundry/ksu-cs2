@@ -17,17 +17,7 @@ int main ()
         String str;
 
         // VERIFY
-        assert(str == '\0');
-    }
-
-	{
-        //------------------------------------------------------
-        // SETUP FIXTURE
-
-        // TEST
-        String str;
-
-        // VERIFY
+        assert(str[0] == '\0');
         assert(str == "");
     }
 
@@ -36,7 +26,7 @@ int main ()
 		String str(50);
 
 		// Verify
+		assert(str[0] == '\0');
 		assert(str == "");
-		assert(str == '\0');
 	}
 }

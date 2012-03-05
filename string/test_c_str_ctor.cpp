@@ -52,4 +52,12 @@ int main ()
         // VERIFY
         assert(str == "It's over 9000!");
     }
+	
+	{
+		// Setup
+		String str("It's over 9000", 50);
+		
+		// Verify
+		assert(str == "It's over 9000");
+	}
 }

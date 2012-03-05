@@ -38,20 +38,35 @@ public:
 	 * Ex: string str("It's over 9000!"); 
 	 */
 	String(const char[]);
+	
+	/*
+	 * Initalizes string to specified size with char array
+	 * Ex: String str("It's over 9000!", 30); 
+	 */
+	String(const char[], const int);
+	
+	/*
+	 * Copies one string to another, with optional capacity
+	 * Ex: String new_str(old_str);
+	 * Ex: String new_str(old_str, old_str.length() * 2); 
+	 */
+	String(const String&);
+	String(const String&, const int);
+	
 
 	/*
 	 * Destroys the dynamic string object
 	 * Ex: none; 
 	 */
-	~String() {};
+	~String();
 
 	/*
 	 * Assignment operator for strings
 	 * Ex: string str = 'a'; 
 	 * Ex: string str = "It's over 9000!"; 
 	 */
-	String operator=(const char);
 	String operator=(const char[]);
+	String operator=(const String&);
 
 	/*
 	 * Tests equality between two strings
@@ -59,6 +74,7 @@ public:
 	 * Ex: str != str2; 
 	 */
 	bool operator==(const String&) const;
+	bool operator==(const char[]) const;
 	bool operator!=(const String& rhs) const { return !(*this == rhs); };
 
 	/*
@@ -128,10 +144,22 @@ public:
 	String operator*=(const int x) { return *this = *this * x; };
 	
 	/*
+	 * Outputs string with << operator
+	 * Ex: std::cout << str1;  
+	 */
+	friend std::ostream& operator<<(std::ostream&, const String&);
+
+	/*
+	 * Inputs string from keyboard with >> operator
+	 * Ex: std::cin >> str1; 
+	 */
+	friend std::istream& operator>>(std::istream&, const String&);
+
+	/*
 	 * Returns the length of the string
 	 * Ex: str.length(); 
 	 */
-	int length() const;
+	int length() const { return strLength; };
 
 	/*
 	 * Returns the number of occurances of a char in a string
@@ -182,21 +210,10 @@ public:
 	String substr(const int) const;
 	String substr(const int, const int);
 
-	/*
-	 * Outputs string with << operator
-	 * Ex: std::cout << str1;  
-	 */
-	friend std::ostream& operator<<(std::ostream&, const String&);
-
-	/*
-	 * Inputs string from keyboard with >> operator
-	 * Ex: std::cin >> str1; 
-	 */
-	friend std::istream& operator>>(std::istream&, const String&);
-
 private:
 	char *s;
-	int capacity;
+	int capacity,
+		strLength;
 };
 
 #endif 
