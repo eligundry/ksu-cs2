@@ -28,6 +28,7 @@ int main ()
 		assert(result3 == "");
 		str1 -= 13;
 		assert(str1 == "Visable.");
+		assert(str1.length() == 8);
 	}
 
 	{

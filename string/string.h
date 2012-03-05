@@ -99,14 +99,10 @@ public:
 	/*
 	 * Adds two strings together
 	 * Ex: str = str1 + str2; 
+	 * Ex: str1 += str2; 
 	 */
 	String operator+(const String&);
 	String operator+(const char[]);
-
-	/*
-	 * Adds string to current string
-	 * Ex: str1 += str2; 
-	 */
 	String operator+=(const String& rhs) { return *this = *this + rhs; };
 
 	/*
@@ -134,15 +130,11 @@ public:
 	/*
 	 * Multiples the contents of a string by integer
 	 * Ex: str1 = str2 * 5; 
-	 */
-	String operator*(const int);
-
-	/*
-	 * Multiples the contents of the string and appends it to that string
 	 * Ex: str1 *= 5; 
 	 */
+	String operator*(const int);
 	String operator*=(const int x) { return *this = *this * x; };
-	
+
 	/*
 	 * Outputs string with << operator
 	 * Ex: std::cout << str1;  
@@ -160,6 +152,12 @@ public:
 	 * Ex: str.length(); 
 	 */
 	int length() const { return strLength; };
+	
+	/*
+	 * Returns the length of the string
+	 * Ex: str.buffCapacity(); 
+	 */
+	int buffCapacity() const { return capacity; };
 
 	/*
 	 * Returns the number of occurances of a char in a string
@@ -193,6 +191,12 @@ public:
 	 */
 	String strip_nl() { return *this - '\n'; };
 	String strip_nl(const String&);
+	
+	/*
+	 * Increases the capacity of a string and copies it
+	 * Ex: str.reallocate(50); 
+	 */
+	String reallocate(const int);
 
 	/*
 	 * Repeats a string a specified number of times with optional seperator

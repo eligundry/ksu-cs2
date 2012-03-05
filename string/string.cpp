@@ -337,8 +337,9 @@ String String::operator-(const char ch)
 String String::operator-(const String& rhs)
 {
 	String result;
+	int i = 0;
 
-	for (int i = 0, j = 0; i < length(); ++i, j = 0) {
+	for (int j = 0; i < length(); ++i, j = 0) {
 		while (s[i + j] == rhs.s[j] && j <= rhs.length()) {
 			++j;
 
@@ -349,7 +350,7 @@ String String::operator-(const String& rhs)
 
 		result += s[i];
 	}
-
+	
 	return result;
 }
 
@@ -498,6 +499,31 @@ String String::strip_nl(const String& replacement)
 	}
 
 	return result;
+}
+
+/*
+ * Increases the capacity of a string and copies it
+ * Ex: str.reallocate(50); 
+ */
+String String::reallocate(const int size)
+{
+	String result(*this, size);
+	
+	delete [] s;
+	
+	int i = 0;
+	capacity = result.capacity;
+	s = new char[capacity];
+	
+	while (result[i] != '\0') {
+		s[i] = result[i];
+		++i;
+	}
+	
+	strLength = i;
+	s[i + 1] = '\0';
+	
+	return *this;
 }
 
 /*
