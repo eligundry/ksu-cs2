@@ -474,24 +474,40 @@ String String::reverse() const
 
 /*
  * Splits a string on a char and returns it as a vector
+ * Ex: str.split(); 
  * Ex: str.split(' '); 
  */
+vector<String> String::split()
+{
+	vector<String> result;
+	
+	for (int i = 0; i < length(); ++i) {
+		result.push_back(s[i]);
+	}
+	
+	return result;
+}
+
 vector<String> String::split(const char ch)
 {
 	vector<String> result;
+	String temp;
 	int i = 0;
-
-	while (i < length()) {
-
-		String temp;
-
-		while(s[i] != ch && s[i] != '\0') {
+	
+	while (s[i] != '\0') {
+		if (s[i] == ch) {
+			temp += '\0';
+			result.push_back(temp);
+			++i;
+			temp = s[i];
+			++i;
+		} else {
 			temp += s[i];
 			++i;
 		}
-		
-		result.push_back(temp);
 	}
+	
+	result.push_back(temp);
 	
 	return result;
 }
@@ -542,7 +558,7 @@ String String::substr(const int start, const int end)
 	} else {
 		String result(length() + 1);
 
-		for (int i = start; i < end; ++i) {
+		for (int i = start; i < end + 1; ++i) {
 			result += s[i];
 		}
 

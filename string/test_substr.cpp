@@ -31,4 +31,13 @@ int main ()
 		assert(result3 == "abc");
 		assert(result4 == "bcdefghijk");
 	}
+	
+	{
+		// Setup
+		String str = "Eli is the best!";
+
+		// Test & Verify
+		assert(str.substr(0, 3) == "Eli");
+		assert(str.substr(4, 5) == "is");
+	}
 }

@@ -194,8 +194,10 @@ public:
 	
 	/*
 	 * Splits a string on a char and returns it as a vector
+	 * Ex: str.split(); 
 	 * Ex: str.split(' '); 
 	 */
+	vector<String> split();
 	vector<String> split(const char);
 	
 	/*
