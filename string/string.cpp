@@ -123,13 +123,6 @@ String::String(const String& str)
 		
 		strLength = i;
 		
-		if (capacity < strLength) {
-			delete [] s;
-			capacity *= 2;
-			s = new char[capacity];
-			strLength = capacity;
-		}
-		
 	} while (capacity < strLength);
 	
 	s[strLength] = '\0';
@@ -137,11 +130,10 @@ String::String(const String& str)
 
 String::String(const String& str, const int cap)
 {
-	if (cap <= str.length()) {
+	if (cap <= str.length())
 		capacity = str.length() + 1;
-	} else {
+	else
 		capacity = cap;
-	}
 	
 	s = new char[capacity];
 
@@ -153,13 +145,6 @@ String::String(const String& str, const int cap)
 		}
 		
 		strLength = i;
-		
-		if (capacity < strLength) {
-			delete [] s;
-			capacity *= 2;
-			s = new char[capacity];
-			strLength = capacity;
-		}
 
 	} while (capacity < strLength);
 	
@@ -230,7 +215,7 @@ bool String::operator<(const String& rhs) const
     bool lessThan = false;
     int i = 0;
 
-    while ( (s[i] != '\0') && (rhs[i] != '\0') ) {
+    while ((s[i] != '\0') && (rhs[i] != '\0')) {
 		if (s[i] > rhs[i]) return false;
         if (s[i] < rhs[i]) lessThan = true;
         ++i;
@@ -249,20 +234,14 @@ bool String::operator<(const String& rhs) const
  */
 String String::operator+(const String& rhs)
 {
-	String result(length() + rhs.length() + 1);
-	int i = 0;
-	
-	for (i = 0; s[i] != '\0'; ++i) {
-		result[i] = s[i];
-	}
+	String result(*this, length() + rhs.length() + 1);
+	int i = length();
 
 	for (int j = 0; rhs[j] != '\0'; ++i, ++j) {
 		result[i] = rhs[j];
 	}
 
-	result.strLength = i;
-	result[i] = '\0';
-	return result;
+	return (result.strLength = i, result[i] = '\0', result);
 } 
 
 /*
@@ -339,9 +318,9 @@ String String::operator*(const int x)
 	} else if (x == 1) {
 		return *this;
 	} else {
-		String result((length() * x) + 1);
+		String result(*this, (length() * x) + 1);
 
-		for (int i = 1; i <= x; ++i) {
+		for (int i = 1; i < x; ++i) {
 			result += *this;
 		}
 
@@ -390,7 +369,12 @@ int String::findchar(const char ch) const
 int String::findchar(const char ch, const int start) const
 {
 	String temp = substr(start);
-	return temp.findchar(ch);
+	int postion = temp.findchar(ch);
+	
+	if (postion != -1)
+		return postion + start;
+	else
+		return postion;
 }
 
 /*
@@ -424,21 +408,7 @@ int String::findstr(const String& find) const
 String String::reallocate(const int size)
 {
 	String temp(*this, size);
-	
-	delete [] s;
-	
-	int i = 0;
-	capacity = temp.capacity;
-	s = new char[capacity];
-	
-	for (i = 0; temp[i] != '\0'; ++i) {
-		s[i] = temp[i];
-	}
-	
-	strLength = i;
-	s[i] = '\0';
-	
-	return *this;
+	return *this = temp;
 }
 
 /*
@@ -481,7 +451,7 @@ vector<String> String::split()
 {
 	vector<String> result;
 	
-	for (int i = 0; i < length(); ++i) {
+	for (int i = 0; s[i] != '\0'; ++i) {
 		result.push_back(s[i]);
 	}
 	
@@ -492,25 +462,19 @@ vector<String> String::split(const char ch)
 {
 	vector<String> result;
 	String temp;
-	int i = 0;
 	
-	while (s[i] != '\0') {
-		if (s[i] == ch) {
-			temp += '\0';
-			result.push_back(temp);
-			++i;
-			temp = s[i];
-			++i;
-		} else {
+	for (int i = 0; s[i] != '\0'; ++i) {
+		if (s[i] != ch) {
 			temp += s[i];
-			++i;
+		} else {
+			result.push_back(temp);
+			temp = s[++i];
 		}
 	}
 	
-	result.push_back(temp);
-	
-	return result;
-}
+	return (result.push_back(temp), result);
+} 
+
 
 /*
  * Strips newlines from strings

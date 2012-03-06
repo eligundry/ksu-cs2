@@ -46,4 +46,17 @@ int main ()
 		// Verify
 		assert(str1 == "This is a test.");
 	}
+
+	{
+		// Setup & Test
+		String str1 = "This",
+			   str2 = str1;
+		
+		// Verify
+		assert(str1 == "This");
+		assert(str2 == "This");
+		assert(str1 == str2);
+		assert(str1.buffCapacity() != str2.buffCapacity());
+		assert(str1.length() == str2.length());
+	}
 }

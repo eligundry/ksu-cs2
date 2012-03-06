@@ -35,7 +35,7 @@ int main ()
 
 		// Test & Verify
 		assert(str1 == "It's over 9000!");
-		assert(str1.findchar('o', 3) == 2);
+		assert(str1.findchar('o', 3) == 5);
 		assert(str1.findchar('z', 3) == -1);
 	}
 }
