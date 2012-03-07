@@ -18,6 +18,7 @@ int main ()
 
         // VERIFY
         assert(str == "a");
+		assert(str.buffCapacity() == 2);
     }
 
     {
@@ -29,6 +30,7 @@ int main ()
 
         // VERIFY
         assert(str == "a");
+        assert(str.buffCapacity() == default_size);
     }
 
     {
@@ -40,6 +42,7 @@ int main ()
 
         // VERIFY
         assert(str == "foobar");
+		assert(str.buffCapacity() == default_size);
     }
 
     {
@@ -51,6 +54,7 @@ int main ()
 
         // VERIFY
         assert(str == "It's over 9000!");
+		assert(str.buffCapacity() == default_size);
     }
 	
 	{
@@ -59,5 +63,6 @@ int main ()
 		
 		// Verify
 		assert(str == "It's over 9000");
+		assert(str.buffCapacity() == 50);
 	}
 }

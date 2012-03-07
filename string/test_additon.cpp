@@ -161,5 +161,6 @@ int main ()
 
 		// Verify
 		assert(str1 == "It's over 9000! And that's really high!");
+		assert(str1.buffCapacity() == default_size);
 	}
 }

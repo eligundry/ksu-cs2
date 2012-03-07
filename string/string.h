@@ -25,26 +25,27 @@ public:
 	 * Ex: String str;
 	 * Ex: String str(50); 
 	 */
-	String(const int size = default_size);
+	String(int size = default_size);
 
 	/*
-	 * Initalizes string to a single char passed to it
+	 * Initalizes string to a single char passed to it with an optional capacity
 	 * Ex: String str('a'); 
 	 */
-	String(const char, const int size = 2);
+	String(const char, int size = 2);
 
 	/*
-	 * Initalizes string to specified size with char array
+	 * Initalizes string to specified size with char array with optional
+	 * capacity
 	 * Ex: String str("It's over 9000!", 30); 
 	 */
-	String(const char[], const int size = default_size);
+	String(const char[], int size = default_size);
 	
 	/*
 	 * Copies one string to another, with optional capacity
 	 * Ex: String new_str(old_str);
 	 * Ex: String new_str(old_str, old_str.length() * 2); 
 	 */
-	String(const String& str, const int cap = default_size);
+	String(const String& str, int cap = default_size);
 	
 
 	/*
@@ -58,7 +59,7 @@ public:
 	 * Ex: String str = 'a'; 
 	 * Ex: String str = "It's over 9000!"; 
 	 */
-	String operator=(const String&);
+	String operator=(String);
 
 	/*
 	 * Tests equality between two strings
@@ -171,7 +172,7 @@ public:
 	 * Increases the capacity of a string and copies it
 	 * Ex: str.reallocate(50); 
 	 */
-	String reallocate(const int);
+	void reallocate(const int size = default_size);
 
 	/*
 	 * Repeats a string a specified number of times with optional seperator
@@ -209,6 +210,12 @@ public:
 	 * Ex: str1.substr(1, 3); 
 	 */
 	String substr(const int left = 0, int right = -1) const;
+	
+	/*
+	 * Swaps two strings pointers
+	 * Ex: str1.swap(str2); 
+	 */
+	void swap(String&);
 
 	/*
 	 * Zips two strings together, like a zipper

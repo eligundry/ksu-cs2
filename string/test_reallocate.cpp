@@ -63,4 +63,16 @@ int main ()
 		assert(str.length() == 1);
 		assert(str.buffCapacity() == 30);
 	}
+	
+	{
+		// Setup
+		String str('a');
+		
+		// Test
+		str.reallocate();
+		
+		// Verify
+		assert(str == "a");
+		assert(str.buffCapacity() == 128);
+	}
 }

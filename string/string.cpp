@@ -9,7 +9,7 @@
 
 /*
  * Initalizes string to '\0', with optional capacity
- * Ex: string str(); 
+ * Ex: String str(); 
  * Ex: String str(50); 
  */
 String::String(const int size)
@@ -21,8 +21,9 @@ String::String(const int size)
 }
 
 /*
- * Initalizes string to a single char passed to it
- * Ex: string str('a'); 
+ * Initializes string to a single char passed to it, with an optional capacity
+ * Ex: String str('a'); 
+ * Ex: String str('a', 30); 
  */
 String::String(const char ch, const int size)
 {
@@ -34,7 +35,8 @@ String::String(const char ch, const int size)
 }
 
 /*
- * Initalizes string to specified size with char array
+ * Initializes string to specified size with char array
+ * Ex: String str("It's over 9000!"); 
  * Ex: String str("It's over 9000!", 30); 
  */
 String::String(const char ch[], const int size)
@@ -103,29 +105,19 @@ String::~String()
 
 /*
  * Assignment operator for strings
- * Ex: string str = 'a'; 
- * Ex: string str = "It's over 9000!"; 
+ * Ex: String str = 'a'; 
+ * Ex: String str = "It's over 9000!"; 
  */
-String String::operator=(const String& rhs)
+String String::operator=(String rhs)
 {
-	delete [] s;
-	capacity = rhs.capacity;
-	s = new char[capacity];
-	strLength = rhs.length();
-	
-	for (int i = 0; rhs[i] != '\0'; ++i) {
-		s[i] = rhs[i];
-	}
-	
-	s[strLength] = '\0';
-	
+	swap(rhs);
 	return *this;
 }
 
 /*
  * Compares a string to another string
- * Ex: str == other_str; 
- * Ex: str != other_str; 
+ * Ex: str1 == str2; 
+ * Ex: str1 != str2; 
  */
 bool String::operator==(const String& rhs) const 
 {
@@ -145,10 +137,10 @@ bool String::operator==(const String& rhs) const
 
 /*
  * Compares the length of the strings and returns bool
- * Ex: str < str2; 
- * Ex: str <= str2; 
- * Ex: str > str2;
- * Ex: str >= str2;
+ * Ex: str1 < str2; 
+ * Ex: str1 <= str2; 
+ * Ex: str1 > str2;
+ * Ex: str1 >= str2;
  */
 bool String::operator<(const String& rhs) const
 {
@@ -353,10 +345,10 @@ istream& String::getline(istream& in, String& str, char delimiter)
  * Increases the capacity of a string and copies it
  * Ex: str.reallocate(50); 
  */
-String String::reallocate(const int size)
+void String::reallocate(const int size)
 {
 	String temp(*this, size);
-	return *this = temp;
+	swap(temp);
 }
 
 /*
@@ -467,6 +459,25 @@ String String::substr(const int left, int right) const
 
 		return result;
 	}
+}
+
+/*
+ * Swaps two strings pointers
+ * Ex: str1.swap(str2); 
+ */
+void String::swap(String& str)
+{
+	char *temp = s;
+	s = str.s;
+	str.s = temp;
+	
+	int temp_cap = capacity;
+	capacity = str.capacity;
+	str.capacity = temp_cap;
+	
+	int temp_length = strLength;
+	strLength = str.strLength;
+	str.strLength = temp_length;
 }
 
 /*
