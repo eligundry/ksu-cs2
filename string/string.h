@@ -11,6 +11,8 @@
 #include <iostream>
 #include <vector>
 
+using std::istream;
+using std::ostream;
 using std::vector;
 
 #define default_size 128
@@ -19,42 +21,30 @@ class String
 {
 public:
 	/*
-	 * Initalizes string to '\0'
-	 * Ex: String str; 
-	 */
-	String();
-
-	/*
-	 * Initalizes string to a specified size
+	 * Initalizes string to '\0', with optional capacity
+	 * Ex: String str;
 	 * Ex: String str(50); 
 	 */
-	String(const int);
+	String(const int size = default_size);
 
 	/*
 	 * Initalizes string to a single char passed to it
 	 * Ex: String str('a'); 
 	 */
-	String(const char);
+	String(const char, const int size = 2);
 
-	/*
-	 * Initalizes string to a character array passed to it
-	 * Ex: String str("It's over 9000!"); 
-	 */
-	String(const char[]);
-	
 	/*
 	 * Initalizes string to specified size with char array
 	 * Ex: String str("It's over 9000!", 30); 
 	 */
-	String(const char[], const int);
+	String(const char[], const int size = default_size);
 	
 	/*
 	 * Copies one string to another, with optional capacity
 	 * Ex: String new_str(old_str);
 	 * Ex: String new_str(old_str, old_str.length() * 2); 
 	 */
-	String(const String&);
-	String(const String&, const int);
+	String(const String& str, const int cap = default_size);
 	
 
 	/*
@@ -157,8 +147,7 @@ public:
 	 * Returns the number of occurances of a char in a string
 	 * Ex: str1.findchar(); 
 	 */
-	int findchar(const char) const;
-	int findchar(const char, const int) const;
+	int findchar(const char, const int start = 0) const;
 
 	/*
 	 * Returns the number of occurances of a string inside of a string
@@ -171,6 +160,12 @@ public:
 	 * Ex: str.length(); 
 	 */
 	int length() const { return strLength; };
+
+	/*
+	 * Get's line of text with optional delimiter
+	 * Ex: str.getline(); 
+	 */
+	istream& getline(istream&, String&, char delimiter = '\n');
 	
 	/*
 	 * Increases the capacity of a string and copies it
@@ -213,8 +208,7 @@ public:
 	 * Ex: str1.substr(1);
 	 * Ex: str1.substr(1, 3); 
 	 */
-	String substr(const int) const;
-	String substr(const int, const int);
+	String substr(const int left = 0, int right = -1) const;
 
 	/*
 	 * Zips two strings together, like a zipper
@@ -224,7 +218,8 @@ public:
 
 private:
 	char *s;
-	int capacity, strLength;
+	int capacity,
+		strLength;
 };
 
 #endif 

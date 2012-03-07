@@ -56,7 +56,7 @@ int main ()
 		assert(str1 == "This");
 		assert(str2 == "This");
 		assert(str1 == str2);
-		assert(str1.buffCapacity() != str2.buffCapacity());
+		assert(str1.buffCapacity() == str2.buffCapacity());
 		assert(str1.length() == str2.length());
 	}
 }

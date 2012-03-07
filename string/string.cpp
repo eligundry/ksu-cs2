@@ -8,19 +8,8 @@
 #include "string.h"
 
 /*
- * Initalizes string to '\0'
+ * Initalizes string to '\0', with optional capacity
  * Ex: string str(); 
- */
-String::String()
-{
-	capacity = default_size;
-	s = new char[capacity]; 
-	strLength = 0;
-	s[0] = '\0';
-}
-
-/*
- * Initalizes string to a specified size
  * Ex: String str(50); 
  */
 String::String(const int size)
@@ -35,43 +24,13 @@ String::String(const int size)
  * Initalizes string to a single char passed to it
  * Ex: string str('a'); 
  */
-String::String(const char ch)
+String::String(const char ch, const int size)
 {
-	capacity = 2;
+	capacity = size;
 	s = new char[capacity];
 	strLength = 1;
 	s[0] = ch;
 	s[1] = '\0';
-}
-
-/*
- * Initalizes string to a character array passed to it
- * Ex: string str("It's over 9000!"); 
- */
-String::String(const char ch[])
-{
-	capacity = default_size;
-	s = new char[capacity];
-	
-	do {
-		int i = 0;
-
-		for (i = 0; ch[i] != '\0'; ++i) {
-			s[i] = ch[i];
-		}
-		
-		strLength = i;
-		
-		if (capacity < strLength) {
-			delete [] s;
-			capacity *= 2;
-			s = new char[capacity];
-			strLength = capacity;
-		}
-		
-	} while (capacity < strLength);
-	
-	s[strLength] = '\0';
 }
 
 /*
@@ -109,25 +68,6 @@ String::String(const char ch[], const int size)
  * Ex: String new_str(old_str);
  * Ex: String new_str(old_str, old_str.length() * 2); 
  */
-String::String(const String& str)
-{
-	capacity = str.length() + 1;
-	s = new char[capacity];
-
-	do {
-		int i = 0;
-		
-		for (i = 0; str[i] != '\0'; ++i) {
-			s[i] = str[i];
-		}
-		
-		strLength = i;
-		
-	} while (capacity < strLength);
-	
-	s[strLength] = '\0';
-}
-
 String::String(const String& str, const int cap)
 {
 	if (cap <= str.length())
@@ -234,8 +174,8 @@ bool String::operator<(const String& rhs) const
  */
 String String::operator+(const String& rhs)
 {
-	String result(*this, length() + rhs.length() + 1);
 	int i = length();
+	String result(*this, i + rhs.length() + 1);
 
 	for (int j = 0; rhs[j] != '\0'; ++i, ++j) {
 		result[i] = rhs[j];
@@ -254,7 +194,8 @@ String String::operator-(const int x)
 	if (x <= 0) {
 		return *this;
 	} else if (x >= length()) {
-		return "";
+		String result;
+		return result;
 	} else {
 		String result(length() - (x + 1));
 
@@ -314,7 +255,8 @@ String String::operator-(const String& rhs)
 String String::operator*(const int x)
 {
 	if (x <= 0) {
-		return "";
+		String result;
+		return result;
 	} else if (x == 1) {
 		return *this;
 	} else {
@@ -332,7 +274,7 @@ String String::operator*(const int x)
  * Outputs string with << operator
  * Ex: std::cout << str1;  
  */
-std::ostream& operator<<(std::ostream& out, const String& str)
+ostream& operator<<(ostream& out, const String& str)
 {
 	out << str.s;
 	return out;
@@ -342,7 +284,7 @@ std::ostream& operator<<(std::ostream& out, const String& str)
  * Inputs string from keyboard with >> operator
  * Ex: std::cin >> str1; 
  */
-std::istream& operator>>(std::istream& in, const String& str)
+istream& operator>>(istream& in, const String& str)
 {
 	in >> str.s;
 	return in;
@@ -353,28 +295,18 @@ std::istream& operator>>(std::istream& in, const String& str)
  * Ex: str1.findchar('a'); 
  * Ex: str1.findchar('a', 3); 
  */
-int String::findchar(const char ch) const
+int String::findchar(const char ch, const int start) const
 {
+	String temp = substr(start);
 	int first_index = -1;
 
 	for (int i = 0; i < length(); ++i) {
-		if (s[i] == ch) {
-			return first_index = i;
+		if (temp[i] == ch) {
+			return first_index = i + start;
 		}
 	}
 
 	return first_index;
-}
-
-int String::findchar(const char ch, const int start) const
-{
-	String temp = substr(start);
-	int postion = temp.findchar(ch);
-	
-	if (postion != -1)
-		return postion + start;
-	else
-		return postion;
 }
 
 /*
@@ -399,6 +331,22 @@ int String::findstr(const String& find) const
 	}
 
 	return times;
+}
+
+/*
+ * Get's line of text with optional delimiter
+ * Ex: str.getline(); 
+ */
+istream& String::getline(istream& in, String& str, char delimiter)
+{
+	String result;
+	char ch;
+
+	while (in.get(ch) && ch != delimiter) {
+		result += ch;
+	}
+
+	return in;
 }
 
 /*
@@ -433,9 +381,10 @@ String String::repeat(const int x, const String& seperator)
  */
 String String::reverse() const
 {
-	String result(length() + 1);
+	int i = length();
+	String result(i + 1);
 
-	for (int i = length(); i >= 0; --i) {
+	for (; i >= 0; --i) {
 		result += s[i];
 	}
 
@@ -500,29 +449,19 @@ String String::strip_nl(const String& replacement)
  * Ex: str1.substr(1);
  * Ex: str1.substr(1, 3); 
  */
-String String::substr(const int start) const
+String String::substr(const int left, int right) const
 {
-	if (start == 0) {
-		return *this;
-	} else {
-		String result(length() + 1);
-
-		for (int i = start; i < length(); ++i) {
-			result += s[i];
-		}
-
-		return result;
+	if (right < 0 || right > length()) {
+		right = length();
 	}
-}
 
-String String::substr(const int start, const int end)
-{
-	if (start == 0) {
-		return *this - (length() - end);
+	if (left == 0) {
+		String result = *this;
+		return result - (length() - right);
 	} else {
 		String result(length() + 1);
 
-		for (int i = start; i < end + 1; ++i) {
+		for (int i = left; i < right + 1; ++i) {
 			result += s[i];
 		}
 

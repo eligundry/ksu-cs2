@@ -42,6 +42,5 @@ int main ()
 		assert(result[3] == "i");
 		assert(result[4] == "n");
 		assert(result[5] == "g");
-		assert(result[0].buffCapacity() == 2);
 	}
 }
