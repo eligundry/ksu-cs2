@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <vector>
+#include <cstdlib>
 
 using std::istream;
 using std::ostream;
@@ -161,12 +162,6 @@ public:
 	 * Ex: str.length(); 
 	 */
 	int length() const { return strLength; };
-
-	/*
-	 * Get's line of text with optional delimiter
-	 * Ex: str.getline(); 
-	 */
-	istream& getline(istream&, String&, char delimiter = '\n');
 	
 	/*
 	 * Increases the capacity of a string and copies it
@@ -216,6 +211,12 @@ public:
 	 * Ex: str1.swap(str2); 
 	 */
 	void swap(String&);
+	
+	/*
+	 * Converts string to integer
+	 * Ex: str1.to_i(); 
+	 */
+	int to_i();
 
 	/*
 	 * Zips two strings together, like a zipper
@@ -228,5 +229,11 @@ private:
 	int capacity,
 		strLength;
 };
+
+/*
+ * Get's line of text with optional delimiter
+ * Ex: str.getline(); 
+ */
+String getline(istream&);
 
 #endif 

@@ -47,7 +47,7 @@ String::String(const char ch[], const int size)
 	do {
 		int i = 0;
 		
-		for (i = 0; ch[i] != '\0'; ++i) {
+		for (; ch[i] != '\0'; ++i) {
 			s[i] = ch[i];
 		}
 		
@@ -72,8 +72,8 @@ String::String(const char ch[], const int size)
  */
 String::String(const String& str, const int cap)
 {
-	if (cap <= str.length())
-		capacity = str.length() + 1;
+	if (cap <= str.strLength)
+		capacity = str.strLength + 1;
 	else
 		capacity = cap;
 	
@@ -82,7 +82,7 @@ String::String(const String& str, const int cap)
 	do {
 		int i = 0;
 		
-		for (i = 0; str[i] != '\0'; ++i) {
+		for (; str[i] != '\0'; ++i) {
 			s[i] = str[i];
 		}
 		
@@ -121,7 +121,7 @@ String String::operator=(String rhs)
  */
 bool String::operator==(const String& rhs) const 
 {
-	if (length() == rhs.length()) {
+	if (strLength == rhs.strLength) {
 		
 		for (int i = 0; s[i] != '\0' && rhs[i] != '\0'; ++i) {
 			if (s[i] != rhs[i]) {
@@ -146,12 +146,11 @@ bool String::operator<(const String& rhs) const
 {
     bool lessThan = false;
     int i = 0;
-
-    while ((s[i] != '\0') && (rhs[i] != '\0')) {
+	
+	for (; (s[i] != '\0') && (rhs[i] != '\0'); ++i) {
 		if (s[i] > rhs[i]) return false;
         if (s[i] < rhs[i]) lessThan = true;
-        ++i;
-    }
+	}
 
     if (lessThan && (s[i] == '\0') && (rhs[i] == '\0')) return true;
     if (lessThan && (rhs[i] == '\0')) return true;
@@ -166,8 +165,8 @@ bool String::operator<(const String& rhs) const
  */
 String String::operator+(const String& rhs)
 {
-	int i = length();
-	String result(*this, i + rhs.length() + 1);
+	int i = strLength;
+	String result(*this, i + rhs.strLength + 1);
 
 	for (int j = 0; rhs[j] != '\0'; ++i, ++j) {
 		result[i] = rhs[j];
@@ -185,13 +184,13 @@ String String::operator-(const int x)
 {
 	if (x <= 0) {
 		return *this;
-	} else if (x >= length()) {
+	} else if (x >= strLength) {
 		String result;
 		return result;
 	} else {
-		String result(length() - (x + 1));
+		String result(strLength - (x + 1));
 
-		for (int i = 0; i < (length() - x); ++i) {
+		for (int i = 0; i < (strLength - x); ++i) {
 			result += s[i];
 		}
 
@@ -205,9 +204,9 @@ String String::operator-(const int x)
  */
 String String::operator-(const char ch)
 {
-	String result(length() + 1);
+	String result(strLength + 1);
 
-	for (int i = 0; i < length(); ++i) {
+	for (int i = 0; i < strLength; ++i) {
 		if (s[i] != ch) {
 			result += s[i];
 		}
@@ -222,14 +221,14 @@ String String::operator-(const char ch)
  */
 String String::operator-(const String& rhs)
 {
-	String result(length() + 1);
+	String result(strLength + 1);
 	int i = 0;
 
-	for (int j = 0; i < length(); ++i, j = 0) {
-		while (s[i + j] == rhs.s[j] && j <= rhs.length()) {
+	for (int j = 0; i < strLength; ++i, j = 0) {
+		while (s[i + j] == rhs.s[j] && j <= rhs.strLength) {
 			++j;
 
-			if (j == rhs.length()) {
+			if (j == rhs.strLength) {
 				i = i + j;
 			}
 		}
@@ -252,7 +251,7 @@ String String::operator*(const int x)
 	} else if (x == 1) {
 		return *this;
 	} else {
-		String result(*this, (length() * x) + 1);
+		String result(*this, (strLength * x) + 1);
 
 		for (int i = 1; i < x; ++i) {
 			result += *this;
@@ -292,7 +291,7 @@ int String::findchar(const char ch, const int start) const
 	String temp = substr(start);
 	int first_index = -1;
 
-	for (int i = 0; i < length(); ++i) {
+	for (int i = 0; i < strLength; ++i) {
 		if (temp[i] == ch) {
 			return first_index = i + start;
 		}
@@ -309,12 +308,12 @@ int String::findstr(const String& find) const
 {
 	int times = 0;
 
-	if (length() >= find.length()) {
-		for (int i = 0, j = 0; i < length(); ++i, j = 0) {
-			while (s[i + j] == find.s[j] && j <= find.length()) {
+	if (strLength >= find.strLength) {
+		for (int i = 0, j = 0; i < strLength; ++i, j = 0) {
+			while (s[i + j] == find.s[j] && j <= find.strLength) {
 				++j;
 
-				if (j == find.length()) {
+				if (j == find.strLength) {
 					++times;
 					i = i + j;
 				}
@@ -323,22 +322,6 @@ int String::findstr(const String& find) const
 	}
 
 	return times;
-}
-
-/*
- * Get's line of text with optional delimiter
- * Ex: str.getline(); 
- */
-istream& String::getline(istream& in, String& str, char delimiter)
-{
-	String result;
-	char ch;
-
-	while (in.get(ch) && ch != delimiter) {
-		result += ch;
-	}
-
-	return in;
 }
 
 /*
@@ -358,7 +341,7 @@ void String::reallocate(const int size)
  */
 String String::repeat(const int x, const String& seperator)
 {
-	String result(((length() + seperator.length()) * x) + 1);
+	String result(((strLength + seperator.strLength) * x) + 1);
 
 	for (int i = 0; i < x; ++i) {
 		result += *this + seperator;
@@ -373,7 +356,7 @@ String String::repeat(const int x, const String& seperator)
  */
 String String::reverse() const
 {
-	int i = length();
+	int i = strLength;
 	String result(i + 1);
 
 	for (; i >= 0; --i) {
@@ -416,7 +399,6 @@ vector<String> String::split(const char ch)
 	return (result.push_back(temp), result);
 } 
 
-
 /*
  * Strips newlines from strings
  * Ex: str.strip_nl(); 
@@ -426,7 +408,7 @@ String String::strip_nl(const String& replacement)
 {
 	String result;
 
-	for (int i = 0; i < length(); ++i) {
+	for (int i = 0; i < strLength; ++i) {
 		if (s[i] != '\n')
 			result += s[i];
 		else
@@ -443,15 +425,15 @@ String String::strip_nl(const String& replacement)
  */
 String String::substr(const int left, int right) const
 {
-	if (right < 0 || right > length()) {
-		right = length();
+	if (right < 0 || right > strLength) {
+		right = strLength;
 	}
 
 	if (left == 0) {
 		String result = *this;
-		return result - (length() - right);
+		return result - (strLength - right);
 	} else {
-		String result(length() + 1);
+		String result(strLength + 1);
 
 		for (int i = left; i < right + 1; ++i) {
 			result += s[i];
@@ -471,13 +453,31 @@ void String::swap(String& str)
 	s = str.s;
 	str.s = temp;
 	
-	int temp_cap = capacity;
-	capacity = str.capacity;
-	str.capacity = temp_cap;
+	capacity = (capacity + str.capacity) - (str.capacity = capacity);
+	strLength = (strLength + str.strLength) - (str.strLength = strLength);
+}
+
+/*
+ * Converts string to integer
+ * Ex: str1.to_i(); 
+ */
+int String::to_i()
+{
+	int startindex = strLength - 1;
+
+	if (s[startindex] == '-') {
+		return 0;
+	}
 	
-	int temp_length = strLength;
-	strLength = str.strLength;
-	str.strLength = temp_length;
+	int value = 0,
+		tenspot = 1;
+	
+	for (int i = startindex; i >= 0; --i) {
+		value += (int(s[i] - int('0')) * tenspot);
+		tenspot *= 10;
+	}	
+	
+	return value;
 }
 
 /*
@@ -486,18 +486,38 @@ void String::swap(String& str)
  */
 String String::zip(const String& rhs) const
 {
-	String result(length() + rhs.length() + 1);
+	String result(strLength + rhs.strLength + 1);
 	int i = 0;
 
 	do {
-		if (i <= length())
+		if (i <= strLength)
 			result += s[i]; 
 
-		if (i <= rhs.length())
+		if (i <= rhs.strLength)
 			result += rhs[i];
 
 		++i;
 	} while (i <= result.capacity - 1);
 
 	return result;
+}
+
+/*
+ * Get's line of text with optional delimiter
+ * Ex: str.getline(); 
+ */
+String getline(istream& in)
+{
+	String line;
+	char ch;
+	
+	for (int i = (in.get(ch), 0); (ch != '\n' && !in.fail()); ++i) {
+		if (i == line.length()) {
+			line.reallocate(line.length() * 2);
+		}
+		
+		line += ch;
+	}
+	
+	return line;
 }

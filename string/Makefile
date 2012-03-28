@@ -4,7 +4,7 @@
 CPP     = g++
 OPTIONS = -g -Wall -W -Wunused -Wuninitialized -Wshadow 
 
-EXE1 = test_default_ctor test_c_str_ctor test_assignment test_subscript test_length test_less_than test_greater_than test_additon test_reverse test_multiplication test_zip test_strip_nl test_repeat test_subtraction test_substr test_cout test_findchar test_findstring test_cin test_reallocate test_split test_swap
+EXE1 = test_default_ctor test_c_str_ctor test_assignment test_subscript test_length test_less_than test_greater_than test_additon test_reverse test_multiplication test_zip test_strip_nl test_repeat test_subtraction test_substr test_cout test_findchar test_findstring test_cin test_reallocate test_split test_swap test_to_i
 EXE2 = 
 
 #==============================================================
@@ -40,6 +40,7 @@ string: $(EXE1) $(EXE2)
 	./test_reallocate
 	./test_split
 	./test_swap
+	./test_to_i
 
 #==============================================================
 # string type
@@ -54,6 +55,29 @@ test_%: string.o test_%.o
 
 test_%.o: string.h test_%.cpp
 	$(CPP) $(OPTIONS) -c test_$*.cpp
+	
+#=========================================================================
+# Compile splits program
+#-------------------------------------------------------------------------
+splits: string.o splits.o
+	$(CPP) string.o splits.o -o splits
+
+splits.o: string.h splits.cpp		
+	$(CPP) $(OPTIONS) -c splits.cpp 
+
+#=========================================================================
+# Compile logview program
+#------------------------------------------------------------------------- 
+
+logview: string.o logview.o logentry.o
+	$(CPP) string.o logview.o logentry.o -o logview
+
+logview.o: string.h logview.cpp
+	$(CPP) $(OPTIONS) -c logview.cpp
+
+logentry.o: string.h logentry.h logentry.cpp
+	$(CPP) $(OPTIONS) -c logentry.cpp
+
 
 #===========================================================================
 leaktest: $(EXE1) $(EXE2)
@@ -72,4 +96,5 @@ clean:
 	rm -f test_less_than test_greater_than
 	rm -f test_additon test_reverse test_multiplication test_zip test_strip_nl test_repeat test_subtraction
 	rm -f test_substr test_cout test_findchar test_findstring test_cin test_reallocate test_split test_swap
+	rm -f test_to_i splits logview 
 

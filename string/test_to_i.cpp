@@ -10,13 +10,14 @@
 int main ()
 {
 	{
-		// setup
-		string str;
+		// Setup
+		String str = "35";
 		
-		// test
-		str.getline(istream& in);
+		// Test
+		int num = str.to_i();
 		
 		// Verify
-		assert(str == "t");
+		assert(str == "35");
+		assert(num == 35);
 	}
 }
