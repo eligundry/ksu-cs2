@@ -5,7 +5,12 @@
  * Description : Main body for logview application.
  */
 
+#include <cstdlib>
+#include <iostream>
 #include <fstream>
+#include <vector>
+
+#include "string.h" 
 #include "logentry.h"
 
 void output_usage_and_exit(const char cmd[], const std::vector<String>& opts);

@@ -509,13 +509,13 @@ String String::zip(const String& rhs) const
 String getline(istream& in)
 {
 	String line;
-	char ch;
-	
-	for (int i = (in.get(ch), 0); (ch != '\n' && !in.fail()); ++i) {
-		if (i == line.length()) {
-			line.reallocate(line.length() * 2);
+	char ch = '\0';
+
+	for (int i = (in.get(ch), 0); (ch != '\n') && (!in.fail()); ++i, in.get(ch)) {
+		if (i == (line.buffCapacity() - 1)) {
+			line.reallocate(line.buffCapacity() * 2);
 		}
-		
+
 		line += ch;
 	}
 	

@@ -4,7 +4,8 @@
 // PRE: string is a line from log file
 // POST: LogEntry object is given values from line of input file
 //
-LogEntry::LogEntry(String s) {
+LogEntry::LogEntry(String s)
+{
         
 	std::vector<String> vec = s.split(' ');
 	
@@ -68,7 +69,8 @@ LogEntry::LogEntry(String s) {
 // POST: vector<LogEntry> result is filled with LogEntry's from lines of
 // istream
 //
-std::vector<LogEntry> parse(std::istream& in) {
+std::vector<LogEntry> parse(std::istream& in)
+{
 	std::vector<LogEntry> result;	
 
 	do {
@@ -84,7 +86,8 @@ std::vector<LogEntry> parse(std::istream& in) {
 // PRE: If out is a file output stream, then out has already been connected to a file.
 // POST: outputs a LogEntry object to the screen
 //
-std::ostream& operator<<(std::ostream& out, const LogEntry& log) {
+std::ostream& operator<<(std::ostream& out, const LogEntry& log)
+{
 	out << "Host: " << log.host << '\n';
 	
 	out << "Day: " << log.date.getday() << '\n';
@@ -107,7 +110,8 @@ std::ostream& operator<<(std::ostream& out, const LogEntry& log) {
 // connected to a file.
 // POST: Outputs each LogEntry to the output stream specified
 //
-void output_all(std::ostream& out, const std::vector<LogEntry> & vec_o_logs) {
+void output_all(std::ostream& out, const std::vector<LogEntry> & vec_o_logs)
+{
     for (unsigned int i = 0; i < vec_o_logs.size(); ++i) {
 		out << vec_o_logs[i];
 	}
@@ -118,7 +122,8 @@ void output_all(std::ostream& out, const std::vector<LogEntry> & vec_o_logs) {
 // connected to a file.  logs has been given values
 // POST: outputs the host of each LogEntry object in logs vector
 //
-void by_host(std::ostream& out, const std::vector<LogEntry>& logs) {
+void by_host(std::ostream& out, const std::vector<LogEntry>& logs)
+{
 	for (unsigned int i = 0; i < logs.size(); ++i) {
 		out << logs[i].gethost() << '\n';
 	}
@@ -129,7 +134,8 @@ void by_host(std::ostream& out, const std::vector<LogEntry>& logs) {
 // POST: returns the sum of number_of_bytes of each LogEntry object in 
 // logs vector
 //
-int byte_count(const std::vector<LogEntry> & logs) {
+int byte_count(const std::vector<LogEntry> & logs)
+{
     int sum = 0;
 
     for (unsigned int i = 0; i < logs.size(); ++i) {
