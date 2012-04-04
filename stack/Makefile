@@ -5,7 +5,7 @@
 CPP          = g++
 CPP_FLAGS    = -g -Wall -W -Wunused -Wuninitialized -Wshadow 
 INCLUDE_OPT  = -iquote . -iquote ../string
-TEST_1 = 
+TEST_1 = test_stack
 TEST_2 = 
 TEST_3 = 
 
@@ -36,25 +36,20 @@ test_%.o: ${STRING_DIR}string.h stack.h test_%.cpp
 # Run test programs
 
 tests: ${TEST_1} ${TEST_2} ${TEST_3} 
-	./test_xxx
-	./test_xxx
-	./test_xxx
+	./test_stack
 
 #===========================================================================
 # Run memory tests
 
 memtests: ${TEST_1} ${TEST_2} ${TEST_3} 
-	valgrind ./test_xxx
-	valgrind ./test_xxx
-	valgrind ./test_xxx
+	valgrind ./test_stack
 
 #===========================================================================
 .PRECIOUS: test_%.o string.o
 
 #============================================================================
+
 clean:
 	rm -f *.o a.out
-	rm -f test_xxx
-	rm -f test_xxx
-	rm -f test_xxx
+	rm -f test_stack
 
